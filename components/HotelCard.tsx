@@ -48,10 +48,13 @@ export default function HotelCard() {
           fill
           sizes="100vw"
           quality={72}
-          className="object-cover opacity-[0.22]"
+          className="object-cover opacity-[0.38]"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#082027] via-[#082027]/75 to-[#082027] pointer-events-none" />
+      {/* Neutral abdunkeln statt einfärben — ein Teal-Schleier über dem Foto
+          macht es unkenntlich, ohne es lesbarer zu machen. */}
+      <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#082027] via-transparent to-[#082027] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"

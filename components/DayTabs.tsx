@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { days, ALL_DAY_INDEX } from "@/data/trip";
-import { DAY_COLORS } from "@/lib/constants";
+import { DAY_COLORS, DAY_LABELS_SHORT } from "@/lib/constants";
 
 const MONTHS_SHORT = ["Jan", "Feb", "März", "April", "Mai", "Juni", "Juli", "Aug", "Sept", "Okt", "Nov", "Dez"];
 
@@ -65,35 +65,40 @@ export default function DayTabs({
               />
             )}
             <span className="relative flex flex-col items-center gap-0.5">
+              {/* Schmale Viewports bekommen die Kurzform — sechs volle
+                  Wochentagsnamen passen auf 375 px nicht nebeneinander. */}
               <span
-                className={`font-semibold uppercase tracking-[0.15em] ${
+                className={`font-semibold uppercase tracking-[0.08em] sm:tracking-[0.15em] ${
                   compact ? "text-[9px]" : "text-[10px]"
-                }`}
+                } ${isActive ? "" : "text-text-muted"}`}
                 style={{ color: isActive ? color : undefined }}
               >
-                {isActive ? undefined : (
-                  <span className="text-text-muted">{isAll ? "ALL" : day!.label}</span>
-                )}
-                {isActive && (isAll ? "ALL" : day!.label)}
+                <span className="sm:hidden">{DAY_LABELS_SHORT[i]}</span>
+                <span className="hidden sm:inline">{isAll ? "Alle" : day!.label}</span>
               </span>
               <span
-                className={`tabular-nums ${compact ? "text-[10px]" : "text-[11px]"}`}
+                className={`tabular-nums ${compact ? "text-[10px]" : "text-[11px]"} ${
+                  isActive ? "" : "text-text-muted/50"
+                }`}
                 style={{ color: isActive ? `${color}bb` : undefined }}
               >
                 {isAll ? (
                   isActive ? (
                     <span className="opacity-80">Alle</span>
                   ) : (
-                    <span className="text-text-muted/50">·</span>
+                    "·"
                   )
-                ) : isActive ? (
-                  <>
-                    {splitDate(day!.date).day}. {splitDate(day!.date).month}
-                  </>
                 ) : (
-                  <span className="text-text-muted/50">
-                    {splitDate(day!.date).day}.{splitDate(day!.date).monthNum}
-                  </span>
+                  <>
+                    <span className="sm:hidden">
+                      {splitDate(day!.date).day}.{splitDate(day!.date).monthNum}
+                    </span>
+                    <span className="hidden sm:inline">
+                      {isActive
+                        ? `${splitDate(day!.date).day}. ${splitDate(day!.date).month}`
+                        : `${splitDate(day!.date).day}.${splitDate(day!.date).monthNum}`}
+                    </span>
+                  </>
                 )}
               </span>
             </span>

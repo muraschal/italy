@@ -142,6 +142,14 @@ export const locations: Location[] = [
       "Zur blauen Stunde vom Ufer aus — die Lichterketten der Bars spiegeln sich im Kanal.",
   },
   {
+    id: "langosteria",
+    name: "Langosteria Bistrot",
+    address: "Via Savona 10, 20144 Milano",
+    coordinates: { lat: 45.455637, lng: 9.1714915 },
+    googleMapsUrl: "https://maps.google.com/?q=Langosteria+Bistrot+Via+Savona+10+Milano",
+    category: "restaurant",
+  },
+  {
     id: "relais-san-vigilio",
     name: "Relais San Vigilio al Castello",
     address: "Via al Castello 7, 24129 Bergamo",
@@ -174,7 +182,7 @@ export const locations: Location[] = [
 export const days: TripDay[] = [
   {
     date: "2026-08-13",
-    label: "Giovedì",
+    label: "Donnerstag",
     subtitle: "La Partenza — nach der Rundfunk-Party über den Gotthard ins Verzascatal",
     totalCost: 43,
     events: [
@@ -220,7 +228,7 @@ export const days: TripDay[] = [
   },
   {
     date: "2026-08-14",
-    label: "Venerdì",
+    label: "Freitag",
     subtitle: "Verso il lago — Vormittag in Mergoscia, Pizza in Ascona, Abend in Como",
     totalCost: 160,
     events: [
@@ -279,7 +287,7 @@ export const days: TripDay[] = [
   },
   {
     date: "2026-08-15",
-    label: "Sabato",
+    label: "Samstag",
     subtitle: "Milano — Rooftop-Pool, Duomo und der Abend in der Stadt",
     totalCost: 336,
     events: [
@@ -338,25 +346,26 @@ export const days: TripDay[] = [
       },
       {
         time: "~20:30",
-        title: "Dinner & Milano am Abend",
-        description: "Vorschlag: Aperitivo und Cena an den Navigli — Bar an Bar entlang des Kanals",
-        locationId: "navigli",
+        title: "Cena — Langosteria Bistrot",
+        description: "Fisch und Meeresfrüchte in der Via Savona · danach die Navigli entlang",
+        locationId: "langosteria",
         transport: "metro",
         transportDuration: "~15 Min",
         cost: 300,
-        costNote: "Dinner & Drinks für 2",
+        costNote: "Dinner & Wein für 2",
         highlight: true,
-        icon: "champagne",
+        icon: "utensils",
+        ticketRef: "langosteria",
         funFact:
-          "Die Navigli sind ein Kanalsystem aus dem 12. Jahrhundert — über sie wurde der Marmor für den Duomo in die Stadt geschifft. Leonardo da Vinci hat an den Schleusen mitgebaut.",
+          "Das Bistrot ist der kleine Ableger der Langosteria in der Via Savona — gleiche Küche, weniger Formalität. Reservieren lohnt sich, die Tische sind früh weg.",
       },
       {
         time: "~00:30",
         title: "Rückweg ins Hotel",
-        description: "2,8 km zu Fuss durch die Altstadt — oder Taxi, je nach Abend",
+        description: "2,3 km zu Fuss durch die Altstadt — oder Taxi, je nach Abend",
         locationId: "sina-de-la-ville",
         transport: "walk",
-        transportDuration: "~35 Min · 2,8 km",
+        transportDuration: "~29 Min · 2,3 km",
         cost: null,
         highlight: false,
         icon: "sparkles",
@@ -365,7 +374,7 @@ export const days: TripDay[] = [
   },
   {
     date: "2026-08-16",
-    label: "Domenica",
+    label: "Sonntag",
     subtitle: "Bergamo — hinauf nach San Vigilio und mit der Funicolare in die Città Alta",
     totalCost: 219,
     events: [
@@ -439,7 +448,7 @@ export const days: TripDay[] = [
   },
   {
     date: "2026-08-17",
-    label: "Lunedì",
+    label: "Montag",
     subtitle: "Il Ritorno — nochmals Città Alta, dann die lange Fahrt nach Hause",
     totalCost: 43,
     events: [
@@ -519,6 +528,17 @@ export const tickets: Record<string, TicketInfo> = {
       "22100 Como, Lombardei",
       "Ersetzt die ursprünglich geplante Nacht in Morcote",
       "TODO: Unterkunft suchen und buchen",
+    ],
+  },
+  langosteria: {
+    title: "Langosteria Bistrot — Cena",
+    day: "Samstag",
+    datetime: "Sa 15. Aug · ~20:30 · 2 Personen",
+    confirmed: false,
+    refs: [],
+    notes: [
+      "Via Savona 10, 20144 Milano",
+      "TODO: reservieren — an einem Ferragosto-Samstag früh dran sein",
     ],
   },
   "sina-de-la-ville": {
@@ -673,7 +693,7 @@ export const budgetOnSite: BudgetItem[] = [
   { label: "Seven7 Ascona — Pizza & Drinks", amount: 160, icon: "utensils" },
   // Samstag
   { label: "Duomo Dachterrassen (2× Lift à 18 €)", amount: 36, icon: "landmark" },
-  { label: "Dinner & Drinks Milano", amount: 300, icon: "champagne" },
+  { label: "Langosteria Bistrot, Milano", amount: 300, icon: "utensils" },
   // Sonntag
   { label: "Colazione & Kaffee Milano", amount: 35, icon: "coffee" },
   { label: "Funicolare Bergamo (2× à 1.70 €)", amount: 4, icon: "train" },

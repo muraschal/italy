@@ -233,9 +233,11 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
           } : {
             background: "rgba(8, 28, 36, 0.86)",
           }} />
+          {/* Mobil schmaler und stärker abgedunkelt — auf 375 px reicht der
+              Textbereich sonst unter das Bild und wird unlesbar. */}
           {getEventImage(event) && (
             <div
-              className="absolute top-0 bottom-0 right-0 w-[30%]"
+              className="absolute top-0 bottom-0 right-0 w-[24%] sm:w-[30%]"
               style={{
                 maskImage: "linear-gradient(to right, transparent 0%, black 70%)",
                 WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 70%)",
@@ -245,7 +247,11 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${getEventImage(event)})` }}
               />
-              <div className={`absolute inset-0 ${isBooked ? "bg-ink/45" : "bg-ink/55"}`} />
+              <div
+                className={`absolute inset-0 ${
+                  isBooked ? "bg-ink/65 sm:bg-ink/45" : "bg-ink/70 sm:bg-ink/55"
+                }`}
+              />
             </div>
           )}
         </div>

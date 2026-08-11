@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { DAY_KEYS } from "@/lib/constants";
@@ -15,7 +16,21 @@ const DAY_IMAGES = imageManifest.days as Record<string, string | undefined>;
  *
  * Ohne passende Datei rendert die Komponente nichts — kein toter Bildverweis.
  */
+/** Server rendert die zurückhaltende Variante; der Client korrigiert nach Breite. */
+function useIsNarrow() {
+  return useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(max-width: 639px)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(max-width: 639px)").matches,
+    () => true
+  );
+}
+
 export default function DayBackdrop({ activeDay }: { activeDay: number }) {
+  const isNarrow = useIsNarrow();
   const key = DAY_KEYS[activeDay];
   const src = key ? DAY_IMAGES[key] : undefined;
 
@@ -26,8 +41,10 @@ export default function DayBackdrop({ activeDay }: { activeDay: number }) {
           <motion.div
             key={src}
             className="absolute inset-0"
+            /* Mobil deutlich zurückhaltender: Dort füllt das Bild die ganze
+               Spaltenbreite und würde die Karten sonst überstrahlen. */
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.45 }}
+            animate={{ opacity: isNarrow ? 0.22 : 0.45 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >

@@ -19,15 +19,21 @@ export const DAY_COLORS = [
 /** Day keys used for route-JSON look-ups. */
 export const DAY_KEYS = ["giorno-1", "giorno-2", "giorno-3", "giorno-4", "giorno-5"] as const;
 
-/** Italian day labels shown in tabs. */
+/** Wochentage in den Tabs — letzter Eintrag ist die kombinierte Ansicht. */
 export const DAY_LABELS = [
-  "Giovedì",
-  "Venerdì",
-  "Sabato",
-  "Domenica",
-  "Lunedì",
-  "TUTTI",
+  "Donnerstag",
+  "Freitag",
+  "Samstag",
+  "Sonntag",
+  "Montag",
+  "Alle",
 ] as const;
+
+/**
+ * Kurzformen für schmale Viewports — sechs Tabs à „Donnerstag“ passen auf einem
+ * 375-px-Screen nicht nebeneinander.
+ */
+export const DAY_LABELS_SHORT = ["Do", "Fr", "Sa", "So", "Mo", "Alle"] as const;
 
 /** German day labels (used in ticket badges & map bounds). */
 export const DAY_LABELS_DE = [

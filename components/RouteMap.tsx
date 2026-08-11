@@ -13,7 +13,6 @@ import {
   Tooltip,
   useMap,
   ZoomControl,
-  Rectangle,
 } from "react-leaflet";
 import L from "leaflet";
 import { locations, days, getLocation, getUniqueVisitedPoisInOrder, ALL_DAY_INDEX } from "@/data/trip";
@@ -79,36 +78,6 @@ function getChronologicalRoute(dayIndex: number): Location[] {
   return route;
 }
 
-/** Rechteck um alle POIs eines Tags (ALL-Ansicht): leicht gepaddet, ohne hidden-Orte. */
-function getDayBoundsRectangle(dayIndex: 0 | 1 | 2): L.LatLngBounds | null {
-  const locs = getChronologicalRoute(dayIndex).filter((l) => !l.hidden);
-  if (locs.length === 0) return null;
-  const bounds = L.latLngBounds(
-    locs.map((l) => [l.coordinates.lat, l.coordinates.lng] as L.LatLngTuple)
-  );
-  bounds.pad(0.16);
-  return bounds;
-}
-
-/**
- * Sitz für die Tages-Beschriftung in der ALL-Ansicht: oben in der jeweiligen Zone (statt Mitte, wo oft POIs liegen),
- * horizontal pro Tag leicht versetzt, damit sich überlappende Boxen weniger ins Gehege kommen.
- */
-function getDayBoundsLabelPosition(bounds: L.LatLngBounds, dayIndex: 0 | 1 | 2): L.LatLng {
-  const nw = bounds.getNorthWest();
-  const ne = bounds.getNorthEast();
-  const sw = bounds.getSouthWest();
-  const latSpan = nw.lat - sw.lat;
-  const lngSpan = ne.lng - nw.lng;
-  if (latSpan <= 1e-8 || lngSpan <= 1e-8) return bounds.getCenter();
-
-  const insetFromNorth = latSpan * 0.1;
-  const lat = nw.lat - insetFromNorth;
-  const hFrac = dayIndex === 0 ? 0.22 : dayIndex === 1 ? 0.53 : 0.78;
-  const lng = nw.lng + lngSpan * hFrac;
-
-  return L.latLng(lat, lng);
-}
 
 function getUniqueLocationsForDay(dayIndex: number): Location[] {
   const seen = new Set<string>();
@@ -460,31 +429,6 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
             <ZoomControl position="bottomright" />
             <TileLayer key={mapStyle} url={MAP_STYLES[mapStyle].url} />
 
-            {/* ALL-Ansicht: Tages-Zonen (Bounding Box je Fr / Sa / So) — unter Routen & Markern */}
-            {activeDay === ALL_DAY_INDEX &&
-              ([0, 1, 2] as const).map((d) => {
-                const b = getDayBoundsRectangle(d);
-                if (!b) return null;
-                const c = DAY_COLORS[d];
-                return (
-                  <Rectangle
-                    key={`all-day-bounds-${d}`}
-                    bounds={b}
-                    pathOptions={{
-                      color: c,
-                      weight: 2.5,
-                      opacity: 0.92,
-                      fillColor: c,
-                      fillOpacity: 0.06,
-                      dashArray: "12 8",
-                      lineCap: "round",
-                      lineJoin: "round",
-                      interactive: false,
-                    }}
-                  />
-                );
-              })}
-
             {/* Route segments between stops */}
             {(() => {
               const palette =
@@ -752,30 +696,6 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
               );
             });
             })()}
-
-            {/* ALL-Ansicht: Tagesnamen in der Mitte jeder Zone (über Linien, unter POI-Markern) */}
-            {activeDay === ALL_DAY_INDEX &&
-              ([0, 1, 2] as const).map((d) => {
-                const b = getDayBoundsRectangle(d);
-                if (!b) return null;
-                const pos = getDayBoundsLabelPosition(b, d);
-                const accent = DAY_COLORS[d];
-                const label = DAY_LABELS_DE[d];
-                return (
-                  <Marker
-                    key={`all-day-bounds-label-${d}`}
-                    position={[pos.lat, pos.lng]}
-                    zIndexOffset={-350}
-                    interactive={false}
-                    icon={L.divIcon({
-                      className: "day-bounds-label-marker",
-                      html: `<div class="day-bounds-label-pill" style="--day-accent:${accent}">${label}</div>`,
-                      iconSize: [128, 32],
-                      iconAnchor: [64, 0],
-                    })}
-                  />
-                );
-              })}
 
             {/* Location markers with visit numbers */}
             {markers.filter((m) => !m.location.hidden).map((m) => {

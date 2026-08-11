@@ -337,7 +337,7 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
               5 Tage Roadtrip
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-accent">L&apos;Itinerario</span>
+              <span className="text-gradient-accent">Itinerario</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
               Mergoscia · Ascona · Como · Milano · Bergamo

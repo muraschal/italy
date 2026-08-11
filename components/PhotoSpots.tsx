@@ -66,7 +66,7 @@ export default function PhotoSpots() {
               Foto Inspiration
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-accent">I Momenti</span>
+              <span className="text-gradient-accent">Momenti</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
               {photoSpots.length} Locations mit hohem Motiv-Potenzial

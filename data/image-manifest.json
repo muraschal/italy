@@ -1,5 +1,26 @@
 {
-  "spots": {},
-  "events": {},
-  "extras": {}
+  "spots": {
+    "ascona": [
+      "/images/spots/ascona-1.webp"
+    ],
+    "citta-alta": [
+      "/images/spots/citta-alta-1.webp"
+    ],
+    "como": [
+      "/images/spots/como-1.webp"
+    ],
+    "mergoscia": [
+      "/images/spots/mergoscia-1.jpg",
+      "/images/spots/mergoscia-2.webp"
+    ],
+    "navigli": [
+      "/images/spots/navigli-1.webp"
+    ]
+  },
+  "events": {
+    "tiefenbrunnen": "/images/events/tiefenbrunnen.webp"
+  },
+  "extras": {
+    "gts": "/images/gts.webp"
+  }
 }

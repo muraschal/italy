@@ -264,7 +264,7 @@ export default function TicketVault() {
         >
           <p className="text-text-secondary text-xs tracking-[0.25em] uppercase mb-3">Alle Reservierungen</p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-            <span className="text-gradient-accent">Le Prenotazioni</span>
+            <span className="text-gradient-accent">Prenotazioni</span>
           </h2>
           <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
             {confirmedCount} von {total} bestätigt

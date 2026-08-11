@@ -44,7 +44,7 @@ export default function HotelCard() {
             Unterkünfte · {drive.car}
           </p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight mb-3">
-            <span className="text-gradient-accent">Le Tappe</span>
+            <span className="text-gradient-accent">Quattro Notti</span>
           </h2>
           <p className="text-text-secondary text-sm sm:text-base font-light tracking-wide">
             Vier Nächte zwischen Verzascatal und Città Alta, drei davon am See

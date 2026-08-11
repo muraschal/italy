@@ -408,7 +408,7 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
               Die Route
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-accent">La Strada</span>
+              <span className="text-gradient-accent">Percorso</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
               Stationen auf der Route

@@ -114,7 +114,7 @@ export default function BudgetSection() {
             Auf einen Blick
           </p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-            <span className="text-gradient-accent">Il Conto</span>
+            <span className="text-gradient-accent">Conto</span>
           </h2>
           <div className="flex flex-col items-center gap-2 mt-4">
             <CurrencyToggle currency={currency} onChange={setCurrency} />

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#141428"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d5a3"/>
+      <stop offset="100%" stop-color="#c9a96e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+
+  <!-- Alpenkette -->
+  <g fill="url(#gold)" fill-opacity="0.14" stroke="url(#gold)" stroke-width="9" stroke-linejoin="round">
+    <path d="M96,300 L168,168 L240,300 Z"/>
+    <path d="M232,300 L318,140 L404,300 Z"/>
+  </g>
+  <!-- Schneekappe auf dem Hauptgipfel -->
+  <path d="M292,188 L318,140 L344,188 L326,178 L310,190 Z" fill="url(#gold)" fill-opacity="0.75"/>
+
+  <!-- Passstrasse -->
+  <path d="M128,410 C196,410 176,352 244,352 C312,352 292,300 360,300"
+        fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M128,410 C196,410 176,352 244,352 C312,352 292,300 360,300"
+        fill="none" stroke="#0a0a1a" stroke-width="4" stroke-linecap="round"
+        stroke-dasharray="16 20" opacity="0.85"/>
+</svg>

@@ -79,7 +79,7 @@ export default function HotelCard() {
             <span className="text-gradient-accent">Quattro Notti</span>
           </h2>
           <p className="text-text-secondary text-sm sm:text-base font-light tracking-wide">
-            Vier Nächte zwischen Verzascatal und Città Alta, drei davon am See
+            Über dem Stausee, am Comer See, mitten in Mailand, über der Città Alta
           </p>
         </motion.div>
 

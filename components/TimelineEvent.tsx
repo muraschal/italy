@@ -13,14 +13,19 @@ import type { TripEvent, TicketInfo } from "@/data/trip";
 import { getLocation, tickets } from "@/data/trip";
 import CopyButton from "./CopyButton";
 import { HOVER_COLOR } from "@/lib/constants";
+import imageManifest from "@/data/image-manifest.json";
 
 /**
- * Maps event locationId → background image unter `public/images/events/`.
- * Noch leer — sobald eigene Fotos vorliegen, hier eintragen.
+ * Hintergrundbilder pro Ort. Kommt aus `data/image-manifest.json`, das vor jedem
+ * Build aus `public/images/events/` erzeugt wird — eine Datei `<location-id>.jpg`
+ * genügt, hier ist nichts einzutragen.
  */
-const EVENT_IMAGE_BY_LOCATION: Record<string, string> = {};
+const EVENT_IMAGE_BY_LOCATION = imageManifest.events as Record<string, string | undefined>;
 
-/** Title-level overrides when one location has multiple events with different images. */
+/**
+ * Ausnahmen, wenn ein Ort mehrere Programmpunkte mit unterschiedlichen Bildern
+ * hat — Schlüssel ist der Event-Titel aus data/trip.ts.
+ */
 const EVENT_IMAGE_BY_TITLE: Record<string, string> = {};
 
 function getEventImage(event: TripEvent): string | undefined {

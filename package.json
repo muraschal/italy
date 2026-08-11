@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "fetch-routes": "tsx scripts/fetch-routes.ts",
-    "check-routes": "tsx scripts/check-routes.ts"
+    "check-routes": "tsx scripts/check-routes.ts",
+    "images": "tsx scripts/generate-image-manifest.ts",
+    "prebuild": "tsx scripts/generate-image-manifest.ts"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

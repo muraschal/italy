@@ -5,14 +5,23 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Camera, ExternalLink } from "lucide-react";
 import { locations } from "@/data/trip";
+import imageManifest from "@/data/image-manifest.json";
 import Lightbox from "./Lightbox";
 
+const spotGalleries = imageManifest.spots as Record<string, string[] | undefined>;
+
 /**
- * Spots ohne eigene Bildergalerie werden trotzdem gezeigt — Karte, Foto-Tipp und
- * Links tragen sich auch ohne Bild. Sobald Fotos unter `public/images/spots/`
- * liegen, greift `photoGallery` in data/trip.ts.
+ * Spots ohne Bilder werden trotzdem gezeigt — Foto-Tipp und Links tragen sich
+ * auch ohne Galerie.
+ *
+ * Die Galerie kommt aus `data/image-manifest.json`, das vor jedem Build aus den
+ * Dateien unter `public/images/spots/` erzeugt wird. Eine Datei namens
+ * `<location-id>-1.jpg` reicht also — `photoGallery` in data/trip.ts bleibt als
+ * manuelle Übersteuerung möglich.
  */
-const photoSpots = locations.filter((l) => l.photoSpot && l.photoTip);
+const photoSpots = locations
+  .filter((l) => l.photoSpot && l.photoTip)
+  .map((l) => ({ ...l, gallery: spotGalleries[l.id] ?? l.photoGallery ?? [] }));
 
 export default function PhotoSpots() {
   const [lightbox, setLightbox] = useState<{
@@ -75,13 +84,13 @@ export default function PhotoSpots() {
                 className="glass rounded-2xl overflow-hidden group hover:glass-strong transition-all"
               >
                 {/* Hero image */}
-                {spot.photoGallery && spot.photoGallery[0] && (
+                {spot.gallery && spot.gallery[0] && (
                   <button
                     onClick={() => openLightbox(spotIdx, 0)}
                     className="relative w-full aspect-[16/9] overflow-hidden cursor-pointer"
                   >
                     <Image
-                      src={spot.photoGallery[0]}
+                      src={spot.gallery[0]}
                       alt={`${spot.name} — Hauptansicht`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -97,9 +106,9 @@ export default function PhotoSpots() {
                         {spot.name}
                       </span>
                     </div>
-                    {spot.photoGallery.length > 1 && (
+                    {spot.gallery.length > 1 && (
                       <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-white/80 text-[10px]">
-                        {spot.photoGallery.length} Fotos
+                        {spot.gallery.length} Fotos
                       </div>
                     )}
                   </button>
@@ -108,7 +117,7 @@ export default function PhotoSpots() {
                 {/* Content area */}
                 <div className="p-4">
                   {/* Ohne Galerie trägt die Karte den Namen selbst */}
-                  {!spot.photoGallery?.length && (
+                  {!spot.gallery?.length && (
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
                         <Camera className="w-3.5 h-3.5 text-accent" />
@@ -127,9 +136,9 @@ export default function PhotoSpots() {
                   )}
 
                   {/* Thumbnail strip */}
-                  {spot.photoGallery && spot.photoGallery.length > 1 && (
+                  {spot.gallery && spot.gallery.length > 1 && (
                     <div className="flex gap-1.5 mb-3 overflow-x-auto scrollbar-hide">
-                      {spot.photoGallery.map((img, imgIdx) => (
+                      {spot.gallery.map((img, imgIdx) => (
                         <button
                           key={imgIdx}
                           onClick={() => openLightbox(spotIdx, imgIdx)}
@@ -200,9 +209,9 @@ export default function PhotoSpots() {
       </section>
 
       {/* Lightbox */}
-      {lightbox && activeSpot?.photoGallery && (
+      {lightbox && activeSpot?.gallery && (
         <Lightbox
-          images={activeSpot.photoGallery}
+          images={activeSpot.gallery}
           index={lightbox.imgIdx}
           spotName={activeSpot.name}
           photoTip={activeSpot.photoTip}

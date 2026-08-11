@@ -57,12 +57,23 @@ Schienenstrecken (Mailänder Metro, Funicolare Bergamo) sind von Hand in `data/m
 
 ### Bilder
 
-`public/images/events/` und `public/images/spots/` sind noch leer. Sobald Fotos vorliegen:
+Bilder werden **allein durch Ablegen** eingebunden — kein Code-Eingriff. Der Dateiname bestimmt die Zuordnung, `<location-id>` ist die `id` aus `data/trip.ts`:
 
-- Foto-Galerien pro Ort über `photoGallery` in `data/trip.ts`
-- Event-Hintergründe über die Maps am Kopf von `components/TimelineEvent.tsx`
+| Datei | Wirkung |
+| --- | --- |
+| `public/images/spots/<location-id>-1.jpg` | Hauptbild der Galerie beim Foto-Spot |
+| `public/images/spots/<location-id>-2.jpg` | weiteres Bild desselben Spots (fortlaufend nummeriert) |
+| `public/images/events/<location-id>.jpg` | Hintergrund des Programmpunkts in der Timeline |
 
-Bis dahin rendern beide Bereiche sauber ohne Bilder.
+Aktuelle IDs: `tiefenbrunnen`, `mergoscia`, `ascona`, `como`, `sina-de-la-ville`, `duomo-milano`, `galleria`, `navigli`, `relais-san-vigilio`, `citta-alta`, `erlenbach`.
+
+Daraus erzeugt `scripts/generate-image-manifest.ts` die Datei `data/image-manifest.json`. Das läuft automatisch als `prebuild`, lässt sich aber auch direkt anstossen:
+
+```bash
+npm run images
+```
+
+Erlaubt sind `.jpg`, `.jpeg`, `.png`, `.webp` und `.avif`. Solange kein Bild vorliegt, rendern Galerie und Timeline sauber ohne — es entstehen keine toten Bildverweise.
 
 ### Fakten im Hero
 

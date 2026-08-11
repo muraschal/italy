@@ -2,13 +2,12 @@ import Hero from "@/components/Hero";
 import HotelCard from "@/components/HotelCard";
 import AgendaViewLoader from "@/components/AgendaViewLoader";
 import PhotoSpots from "@/components/PhotoSpots";
-import TicketVault from "@/components/TicketVault";
 import BudgetSection from "@/components/BudgetSection";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { AgendaDayProvider } from "@/components/AgendaDayContext";
 
-/* Layout rhythm: Hero (100dvh) + Hotel/Budget/Tickets (min-h-dvh on lg) + long Agenda + Fotos + Footer. Desktop scroll-snap: globals.css + snap sections. */
+/* Layout rhythm: Hero (100dvh) + Hotel/Budget (min-h-dvh on lg) + long Agenda + Fotos + Footer. */
 export default function Home() {
   return (
     <AgendaDayProvider>
@@ -26,8 +25,6 @@ export default function Home() {
             <AgendaViewLoader />
 
             <PhotoSpots />
-
-            <TicketVault />
 
             <BudgetSection />
 

@@ -22,6 +22,9 @@ import imageManifest from "@/data/image-manifest.json";
  */
 const EVENT_IMAGE_BY_LOCATION = imageManifest.events as Record<string, string | undefined>;
 
+/** Fällt auf das erste Galeriebild des Orts zurück, wenn kein eigenes Event-Bild existiert. */
+const SPOT_GALLERIES = imageManifest.spots as Record<string, string[] | undefined>;
+
 /**
  * Ausnahmen, wenn ein Ort mehrere Programmpunkte mit unterschiedlichen Bildern
  * hat — Schlüssel ist der Event-Titel aus data/trip.ts.
@@ -29,7 +32,9 @@ const EVENT_IMAGE_BY_LOCATION = imageManifest.events as Record<string, string | 
 const EVENT_IMAGE_BY_TITLE: Record<string, string> = {};
 
 function getEventImage(event: TripEvent): string | undefined {
-  return EVENT_IMAGE_BY_TITLE[event.title] ?? (event.locationId ? EVENT_IMAGE_BY_LOCATION[event.locationId] : undefined);
+  if (EVENT_IMAGE_BY_TITLE[event.title]) return EVENT_IMAGE_BY_TITLE[event.title];
+  if (!event.locationId) return undefined;
+  return EVENT_IMAGE_BY_LOCATION[event.locationId] ?? SPOT_GALLERIES[event.locationId]?.[0];
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -78,7 +83,7 @@ function TicketPopover({ ticket, onClose }: { ticket: TicketInfo; onClose: () =>
             <span className="text-[10px] text-text-muted">{ref.label}</span>
             <span className="flex items-center font-mono text-[10px] text-text-secondary">
               {ref.value.length > 12 ? `${ref.value.slice(0, 6)}…${ref.value.slice(-4)}` : ref.value}
-              <CopyButton value={ref.value} variant="inline" />
+              <CopyButton value={ref.value} />
             </span>
           </div>
         ))}

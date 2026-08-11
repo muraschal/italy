@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, CheckCircle2, Clock } from "lucide-react";
 import {
@@ -14,6 +15,10 @@ import {
 } from "@/data/trip";
 import { CHF_PER_EUR, formatBudgetMoney, type TripCurrency } from "@/lib/currency";
 import ItalyTravelInsights from "./ItalyTravelInsights";
+import imageManifest from "@/data/image-manifest.json";
+
+/** Dezenter Hintergrund — die Navigli passen zum Thema Geld ausgeben. */
+const BG_IMAGE = (imageManifest.spots as Record<string, string[] | undefined>).navigli?.[0];
 
 function CurrencyToggle({
   currency,
@@ -95,7 +100,18 @@ export default function BudgetSection() {
       className="relative min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6 overflow-hidden"
       style={{ backgroundColor: "#04131a" }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#04131a] via-transparent to-[#04131a] pointer-events-none" />
+      {BG_IMAGE && (
+        <Image
+          src={BG_IMAGE}
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          quality={70}
+          className="object-cover opacity-[0.18]"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#04131a] via-[#04131a]/70 to-[#04131a] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"

@@ -2,14 +2,13 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Hotel, Map, Camera, Ticket, Wallet } from "lucide-react";
+import { Hotel, Map, Camera, Wallet } from "lucide-react";
 import { useLenis } from "lenis/react";
 
 const sections = [
   { id: "hotel", label: "Hotel", icon: Hotel },
   { id: "agenda", label: "Agenda", icon: Map },
   { id: "fotos", label: "Fotos", icon: Camera },
-  { id: "tickets", label: "Tickets", icon: Ticket },
   { id: "budget", label: "Budget", icon: Wallet },
 ];
 

@@ -1,13 +1,29 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Heart, ExternalLink } from "lucide-react";
 import { locations } from "@/data/trip";
+import imageManifest from "@/data/image-manifest.json";
+
+/** Letzte Station der Reise als Ausklang. */
+const BG_IMAGE = (imageManifest.spots as Record<string, string[] | undefined>)["citta-alta"]?.[0];
 
 export default function Footer() {
   return (
     <footer className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden" style={{ backgroundColor: "#061a20" }}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#061a20] via-transparent to-[#061a20] pointer-events-none" />
+      {BG_IMAGE && (
+        <Image
+          src={BG_IMAGE}
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          quality={70}
+          className="object-cover opacity-25"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#061a20] via-[#061a20]/70 to-[#061a20] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"

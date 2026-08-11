@@ -6,15 +6,13 @@ import { Copy, Check } from "lucide-react";
 interface CopyButtonProps {
   /** The text value to copy to clipboard. */
   value: string;
-  /** Visual variant — "pill" for TicketVault, "inline" for Timeline popovers. */
-  variant?: "pill" | "inline";
 }
 
 /**
- * Shared copy-to-clipboard button with success feedback.
- * Gracefully falls back if the Clipboard API is unavailable.
+ * Copy-to-clipboard button für die Referenz-Popovers im Tagesprogramm.
+ * Fällt still zurück, wenn die Clipboard-API nicht verfügbar ist (HTTP, alte Browser).
  */
-export default function CopyButton({ value, variant = "pill" }: CopyButtonProps) {
+export default function CopyButton({ value }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const copy = useCallback(async () => {
@@ -23,41 +21,21 @@ export default function CopyButton({ value, variant = "pill" }: CopyButtonProps)
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard API unavailable (HTTP, older browser) — silent fail
+      // Clipboard API unavailable — silent fail
     }
   }, [value]);
-
-  if (variant === "inline") {
-    return (
-      <button
-        type="button"
-        onClick={copy}
-        className="ml-2 p-1 rounded hover:bg-glass-hover transition-colors"
-        aria-label="Kopieren"
-      >
-        {copied ? (
-          <Check className="w-3 h-3 text-accent-green" />
-        ) : (
-          <Copy className="w-3 h-3 text-text-muted" />
-        )}
-      </button>
-    );
-  }
 
   return (
     <button
       type="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        void copy();
-      }}
-      className="shrink-0 p-2 rounded-full bg-white/[0.06] border border-white/[0.08] hover:bg-white/[0.12] transition-colors"
+      onClick={copy}
+      className="ml-2 p-1 rounded hover:bg-glass-hover transition-colors"
       aria-label="Kopieren"
     >
       {copied ? (
-        <Check className="w-3.5 h-3.5 text-accent-green" />
+        <Check className="w-3 h-3 text-accent-green" />
       ) : (
-        <Copy className="w-3.5 h-3.5 text-text-muted hover:text-accent transition-colors" />
+        <Copy className="w-3 h-3 text-text-muted" />
       )}
     </button>
   );

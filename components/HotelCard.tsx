@@ -3,8 +3,17 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Globe, Moon, ExternalLink, Route, Clock, Mountain } from "lucide-react";
-import { hotels, drive } from "@/data/trip";
+import { hotels, drive, tickets } from "@/data/trip";
 import imageManifest from "@/data/image-manifest.json";
+
+/**
+ * Buchungsstand kommt aus `tickets` — dort steht er ohnehin für die Popovers im
+ * Tagesprogramm. Unterkünfte ohne Eintrag (z. B. privat organisiert) bekommen
+ * kein Abzeichen, statt eines zu erfinden.
+ */
+function bookingState(hotelId: string): boolean | undefined {
+  return tickets[hotelId]?.confirmed;
+}
 
 /** Optionales Bild des Wagens: `public/images/gts.jpg` ablegen, fertig. */
 const carImage = (imageManifest.extras as Record<string, string | undefined>).gts;
@@ -117,10 +126,22 @@ export default function HotelCard() {
                     {h.name}
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[10px] tabular-nums">
-                  <Moon className="w-2.5 h-2.5" />
-                  {h.nights}
-                </span>
+                <div className="flex shrink-0 items-center gap-1.5">
+                  {bookingState(h.id) === false && (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-400/10 text-amber-300/90 border border-amber-400/20 text-[9px] uppercase tracking-[0.14em] font-semibold">
+                      Offen
+                    </span>
+                  )}
+                  {bookingState(h.id) === true && (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-white/[0.06] text-text-secondary border border-white/[0.06] text-[9px] uppercase tracking-[0.14em] font-semibold">
+                      Gebucht
+                    </span>
+                  )}
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[10px] tabular-nums">
+                    <Moon className="w-2.5 h-2.5" />
+                    {h.nights}
+                  </span>
+                </div>
               </div>
 
               <p className="text-[12px] text-text-secondary/80 leading-relaxed mb-4 flex-1">

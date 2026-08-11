@@ -40,7 +40,7 @@ Der zweite Job existiert, weil die Karte bei einem fehlenden Streckenverlauf sti
 
 ## Daten pflegen
 
-Der gesamte Reiseinhalt steckt in **`data/trip.ts`** — Orte, Tagesprogramm, Übernachtungen, Tickets und Budget. Die Komponenten leiten alles davon ab; Tagesanzahl und Farben kommen aus `lib/constants.ts` und müssen zur Länge von `days` passen.
+Der gesamte Reiseinhalt steckt in **`data/trip.ts`** — Orte, Tagesprogramm, Übernachtungen, Reservationen und Budget. Der Buchungsstand aus `tickets` steuert die Abzeichen „Offen“/„Gebucht“ an den Unterkünften und die Popovers im Tagesprogramm. Die Komponenten leiten alles davon ab; Tagesanzahl und Farben kommen aus `lib/constants.ts` und müssen zur Länge von `days` passen.
 
 ### Streckenverläufe neu holen
 
@@ -65,6 +65,9 @@ Bilder werden **allein durch Ablegen** eingebunden — kein Code-Eingriff. Der D
 | `public/images/spots/<location-id>-2.jpg` | weiteres Bild desselben Spots (fortlaufend nummeriert) |
 | `public/images/events/<location-id>.jpg` | Hintergrund des Programmpunkts in der Timeline |
 | `public/images/gts.jpg` | Bild des Wagens, als Banner in der Unterkunfts-Sektion |
+| `public/images/hero.jpg` | grossflächiger Hero-Hintergrund (ohne Datei: erstes Como-Bild) |
+
+Spot-Bilder werden mehrfach verwendet: Sie erscheinen in der Galerie, dienen im Tagesprogramm als Event-Hintergrund (falls unter `events/` kein eigenes liegt) und tragen die Hintergründe von Budget- und Footer-Sektion.
 
 Aktuelle IDs: `tiefenbrunnen`, `mergoscia`, `ascona`, `como`, `sina-de-la-ville`, `duomo-milano`, `galleria`, `navigli`, `relais-san-vigilio`, `citta-alta`, `erlenbach`.
 

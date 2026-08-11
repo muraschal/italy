@@ -1,12 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ItalyHeroFact from "./ItalyHeroFact";
 import { TRIP_START_ISO } from "@/data/trip";
+import imageManifest from "@/data/image-manifest.json";
 
 const TARGET = new Date(TRIP_START_ISO).getTime();
+
+/**
+ * Hero-Hintergrund: `public/images/hero.jpg` gewinnt, sonst das erste Bild von
+ * Como. Ohne jedes Bild bleibt der reine Farbverlauf — nichts bricht.
+ */
+const extras = imageManifest.extras as Record<string, string | undefined>;
+const spots = imageManifest.spots as Record<string, string[] | undefined>;
+const HERO_IMAGE = extras.hero ?? spots.como?.[0];
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -33,7 +43,25 @@ export default function Hero() {
     <section className="relative h-[100svh] min-h-[100svh] w-full max-w-full overflow-hidden lg:h-dvh lg:min-h-0">
       {/* Background gradient — Nachthimmel über den Alpen */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a2b36] via-[#06181f] to-ink" />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink pointer-events-none" />
+
+      {/* Grossflächiges Hintergrundbild, stark abgedunkelt damit der Text trägt */}
+      {HERO_IMAGE && (
+        <>
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            aria-hidden
+            fill
+            sizes="100vw"
+            priority
+            quality={85}
+            className="object-cover opacity-45"
+          />
+          <div className="absolute inset-0 bg-ink/45 pointer-events-none" />
+        </>
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/25 to-ink pointer-events-none" />
 
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_50%_30%,rgba(232,132,92,0.3)_0%,transparent_70%)]" />
 

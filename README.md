@@ -64,6 +64,7 @@ Bilder werden **allein durch Ablegen** eingebunden — kein Code-Eingriff. Der D
 | `public/images/spots/<location-id>-1.jpg` | Hauptbild der Galerie beim Foto-Spot |
 | `public/images/spots/<location-id>-2.jpg` | weiteres Bild desselben Spots (fortlaufend nummeriert) |
 | `public/images/events/<location-id>.jpg` | Hintergrund des Programmpunkts in der Timeline |
+| `public/images/gts.jpg` | Bild des Wagens, als Banner in der Unterkunfts-Sektion |
 
 Aktuelle IDs: `tiefenbrunnen`, `mergoscia`, `ascona`, `como`, `sina-de-la-ville`, `duomo-milano`, `galleria`, `navigli`, `relais-san-vigilio`, `citta-alta`, `erlenbach`.
 

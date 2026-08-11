@@ -630,7 +630,7 @@ export const hotels = [
 
 /** Kennzahlen der Fahrstrecke, gerundet aus data/car-routes.json. */
 export const drive = {
-  car: "Porsche 911 GTS",
+  car: "Porsche Cayman GTS",
   totalKm: 731,
   totalHours: 10.4,
   legs: 6,

@@ -11,9 +11,11 @@
  *   public/images/spots/<location-id>-1.jpg    Galerie beim Foto-Spot
  *   public/images/spots/<location-id>-2.jpg    weitere Bilder desselben Spots
  *   public/images/events/<location-id>.jpg     Hintergrund im Tagesprogramm
+ *   public/images/<name>.jpg                   freies Bild, z. B. `gts.jpg`
  *
  * `<location-id>` ist die `id` aus `data/trip.ts`, also z. B. `mergoscia`,
- * `como` oder `navigli`.
+ * `como` oder `navigli`. Bilder direkt in `public/images/` landen unter ihrem
+ * Dateinamen in `extras` und werden gezielt eingebunden (siehe HotelCard).
  */
 
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from "fs";
@@ -26,6 +28,8 @@ interface Manifest {
   spots: Record<string, string[]>;
   /** location-id → einzelnes Hintergrundbild */
   events: Record<string, string>;
+  /** Dateiname ohne Endung → Bild, für alles ausserhalb der Ortslogik */
+  extras: Record<string, string>;
 }
 
 function listImages(dir: string): string[] {
@@ -59,12 +63,13 @@ function buildSpots(dir: string): Record<string, string[]> {
   return out;
 }
 
-function buildEvents(dir: string): Record<string, string> {
+/** Flache Ordner: Dateiname ohne Endung → Pfad. */
+function buildFlat(dir: string, urlPrefix: string): Record<string, string> {
   const out: Record<string, string> = {};
   for (const file of listImages(dir).sort()) {
     const id = file.replace(EXTENSIONS, "");
     // Erste Datei pro id gewinnt — bei Dubletten wie `como.jpg` + `como.png`.
-    if (!(id in out)) out[id] = `/images/events/${file}`;
+    if (!(id in out)) out[id] = `${urlPrefix}/${file}`;
   }
   return out;
 }
@@ -72,17 +77,22 @@ function buildEvents(dir: string): Record<string, string> {
 const publicImages = join(process.cwd(), "public", "images");
 const manifest: Manifest = {
   spots: buildSpots(join(publicImages, "spots")),
-  events: buildEvents(join(publicImages, "events")),
+  events: buildFlat(join(publicImages, "events"), "/images/events"),
+  extras: buildFlat(publicImages, "/images"),
 };
 
 const outPath = join(process.cwd(), "data", "image-manifest.json");
 writeFileSync(outPath, JSON.stringify(manifest, null, 2) + "\n");
 
 const spotCount = Object.values(manifest.spots).reduce((s, g) => s + g.length, 0);
-const eventCount = Object.keys(manifest.events).length;
 console.log(
-  `✓ data/image-manifest.json — ${spotCount} Spot-Bild(er) in ${Object.keys(manifest.spots).length} Galerie(n), ${eventCount} Event-Bild(er)`
+  `✓ data/image-manifest.json — ${spotCount} Spot-Bild(er) in ${Object.keys(manifest.spots).length} Galerie(n), ` +
+    `${Object.keys(manifest.events).length} Event-Bild(er), ${Object.keys(manifest.extras).length} Extra(s)`
 );
 
-const known = Object.keys(manifest.spots).concat(Object.keys(manifest.events));
+const known = [
+  ...Object.keys(manifest.spots),
+  ...Object.keys(manifest.events),
+  ...Object.keys(manifest.extras),
+];
 if (known.length > 0) console.log(`  Zugeordnet: ${[...new Set(known)].join(", ")}`);

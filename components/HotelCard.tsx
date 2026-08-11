@@ -1,8 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Globe, Moon, ExternalLink, Route, Clock, Mountain } from "lucide-react";
 import { hotels, drive } from "@/data/trip";
+import imageManifest from "@/data/image-manifest.json";
+
+/** Optionales Bild des Wagens: `public/images/gts.jpg` ablegen, fertig. */
+const carImage = (imageManifest.extras as Record<string, string | undefined>).gts;
 
 const STATS = [
   { Icon: Route, label: "Fahrstrecke", value: `${drive.totalKm} km` },
@@ -45,6 +50,31 @@ export default function HotelCard() {
             Vier Nächte zwischen Verzascatal und Città Alta, drei davon am See
           </p>
         </motion.div>
+
+        {/* Der Wagen — erscheint, sobald public/images/gts.jpg existiert */}
+        {carImage && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-2xl overflow-hidden mb-6 aspect-[21/9] sm:aspect-[3/1]"
+          >
+            <Image
+              src={carImage}
+              alt={drive.car}
+              fill
+              sizes="(max-width: 1024px) 100vw, 64rem"
+              className="object-cover"
+              quality={82}
+              priority={false}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#082027] via-transparent to-transparent" />
+            <p className="absolute bottom-3 left-4 text-[10px] sm:text-[11px] text-white/85 tracking-[0.22em] uppercase drop-shadow-lg">
+              {drive.car}
+            </p>
+          </motion.div>
+        )}
 
         {/* Kennzahlen der Fahrt */}
         <motion.div

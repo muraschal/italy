@@ -107,7 +107,7 @@ export default function ItalyHeroFact() {
       className="mx-auto w-full max-w-md min-h-[2.75rem] sm:min-h-[3rem] px-2 flex flex-col items-center justify-center gap-1.5"
       aria-live="polite"
     >
-      <p className="text-[10px] sm:text-[11px] text-gold/75 font-mono tabular-nums tracking-[0.12em] uppercase">
+      <p className="text-[10px] sm:text-[11px] text-accent/75 font-mono tabular-nums tracking-[0.12em] uppercase">
         Fakt {idx + 1} / {facts.length}
       </p>
       <AnimatePresence mode="wait">

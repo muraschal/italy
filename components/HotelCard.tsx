@@ -16,14 +16,14 @@ export default function HotelCard() {
     <section
       id="hotel"
       className="relative min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6"
-      style={{ backgroundColor: "#0c0b16" }}
+      style={{ backgroundColor: "#082027" }}
     >
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.12) 0%, transparent 55%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(232,132,92,0.12) 0%, transparent 55%)",
         }}
       />
 
@@ -39,10 +39,10 @@ export default function HotelCard() {
             Unterkünfte · {drive.car}
           </p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight mb-3">
-            <span className="text-gradient-gold">Le Tappe</span>
+            <span className="text-gradient-accent">Le Tappe</span>
           </h2>
           <p className="text-text-secondary text-sm sm:text-base font-light tracking-wide">
-            Vier Nächte zwischen Verzascatal und Città Alta
+            Vier Nächte zwischen Verzascatal und Città Alta, drei davon am See
           </p>
         </motion.div>
 
@@ -52,12 +52,12 @@ export default function HotelCard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="glass-gold rounded-2xl p-5 sm:p-6 mb-8"
+          className="glass-accent rounded-2xl p-5 sm:p-6 mb-8"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
             {STATS.map(({ Icon, label, value }) => (
               <div key={label} className="flex items-start gap-2.5">
-                <Icon className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+                <Icon className="w-4 h-4 text-accent mt-0.5 shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[10px] text-text-muted uppercase tracking-[0.15em]">{label}</p>
                   <p className="text-xs text-text-primary mt-0.5 leading-snug">{value}</p>
@@ -76,18 +76,18 @@ export default function HotelCard() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.15 + i * 0.08 }}
-              className="glass rounded-2xl p-5 border border-gold/[0.06] hover:border-gold/[0.14] transition-colors flex flex-col"
+              className="glass rounded-2xl p-5 border border-accent/[0.06] hover:border-accent/[0.14] transition-colors flex flex-col"
             >
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="min-w-0">
-                  <p className="text-[10px] text-gold/70 uppercase tracking-[0.2em]">
+                  <p className="text-[10px] text-accent/70 uppercase tracking-[0.2em]">
                     Nacht {i + 1} · {h.city}
                   </p>
                   <h3 className="text-base sm:text-lg font-light text-text-primary mt-1 leading-snug">
                     {h.name}
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[10px] tabular-nums">
+                <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[10px] tabular-nums">
                   <Moon className="w-2.5 h-2.5" />
                   {h.nights}
                 </span>
@@ -99,14 +99,14 @@ export default function HotelCard() {
 
               <div className="space-y-2 pt-3 border-t border-white/[0.05]">
                 <div className="flex items-start gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-gold/70 mt-0.5 shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-accent/70 mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[11px] text-text-primary leading-snug">{h.address}</p>
                     <a
                       href={h.googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] text-gold/70 hover:text-gold transition-colors inline-flex items-center gap-1 mt-1"
+                      className="text-[10px] text-accent/70 hover:text-accent transition-colors inline-flex items-center gap-1 mt-1"
                     >
                       Google Maps <ExternalLink className="w-2.5 h-2.5" />
                     </a>
@@ -114,22 +114,22 @@ export default function HotelCard() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-gold/70 shrink-0" />
+                  <Clock className="w-3.5 h-3.5 text-accent/70 shrink-0" />
                   <p className="text-[11px] text-text-primary">
-                    <span className="text-gold font-medium">{h.checkIn}</span>
+                    <span className="text-accent font-medium">{h.checkIn}</span>
                     <span className="text-text-muted mx-1">→</span>
-                    <span className="text-gold font-medium">{h.checkOut}</span>
+                    <span className="text-accent font-medium">{h.checkOut}</span>
                   </p>
                 </div>
 
                 {h.website && (
                   <div className="flex items-center gap-2">
-                    <Globe className="w-3.5 h-3.5 text-gold/70 shrink-0" />
+                    <Globe className="w-3.5 h-3.5 text-accent/70 shrink-0" />
                     <a
                       href={h.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] text-text-primary hover:text-gold transition-colors truncate"
+                      className="text-[11px] text-text-primary hover:text-accent transition-colors truncate"
                     >
                       {new URL(h.website).hostname.replace(/^www\./, "")}
                     </a>

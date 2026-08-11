@@ -101,7 +101,7 @@ export default function BottomSheet({
       {/* Sheet */}
       <motion.div
         ref={containerRef}
-        className="absolute left-0 right-0 z-40 flex flex-col bg-navy/95 backdrop-blur-2xl rounded-t-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.4)]"
+        className="absolute left-0 right-0 z-40 flex flex-col bg-ink/95 backdrop-blur-2xl rounded-t-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.4)]"
         style={{
           y,
           height: maxSheetH,

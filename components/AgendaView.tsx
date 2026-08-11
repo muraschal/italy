@@ -76,7 +76,7 @@ export default function AgendaView() {
       <section id="agenda" className="relative">
         <div
           ref={tabsRef}
-          className="sticky top-0 z-30 bg-navy/90 backdrop-blur-xl border-b border-white/[0.06]"
+          className="sticky top-0 z-30 bg-ink/90 backdrop-blur-xl border-b border-white/[0.06]"
         >
           <div className="max-w-md mx-auto px-4 py-2.5">
             <DayTabs activeDay={activeDay} onChange={setActiveDay} groupId="agenda" />
@@ -124,7 +124,7 @@ export default function AgendaView() {
   return (
     <section id="agenda" className="relative">
       {/* Sticky day tabs */}
-      <div className="sticky top-0 z-30 bg-navy/90 backdrop-blur-xl border-b border-white/[0.06]">
+      <div className="sticky top-0 z-30 bg-ink/90 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="max-w-md mx-auto px-4 py-2.5">
           <DayTabs activeDay={activeDay} onChange={setActiveDay} groupId="agenda" />
         </div>

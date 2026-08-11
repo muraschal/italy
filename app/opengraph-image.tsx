@@ -16,7 +16,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0a0a1a 0%, #141428 50%, #0a0a1a 100%)",
+          background: "linear-gradient(135deg, #06181f 0%, #0d2b35 50%, #06181f 100%)",
           fontFamily: "system-ui, sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -32,7 +32,7 @@ export default async function Image() {
             width: "800px",
             height: "800px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(232,132,92,0.12) 0%, transparent 70%)",
           }}
         />
 
@@ -45,7 +45,7 @@ export default async function Image() {
             fontSize: 56,
             fontWeight: 200,
             letterSpacing: "-0.5px",
-            color: "#f5f0e8",
+            color: "#f4f0e6",
             marginBottom: 12,
             display: "flex",
           }}
@@ -58,7 +58,7 @@ export default async function Image() {
           style={{
             fontSize: 28,
             fontWeight: 300,
-            color: "#c9a96e",
+            color: "#e8845c",
             letterSpacing: "4px",
             textTransform: "uppercase" as const,
             marginBottom: 24,
@@ -73,7 +73,7 @@ export default async function Image() {
           style={{
             width: 80,
             height: 1,
-            background: "linear-gradient(90deg, transparent, #c9a96e, transparent)",
+            background: "linear-gradient(90deg, transparent, #e8845c, transparent)",
             marginBottom: 24,
             display: "flex",
           }}
@@ -84,7 +84,7 @@ export default async function Image() {
           style={{
             fontSize: 20,
             fontWeight: 300,
-            color: "rgba(245,240,232,0.5)",
+            color: "rgba(244,240,230,0.5)",
             letterSpacing: "2px",
             display: "flex",
             gap: 16,
@@ -92,9 +92,9 @@ export default async function Image() {
           }}
         >
           <span>13.–17. August 2026</span>
-          <span style={{ color: "rgba(201,169,110,0.4)" }}>·</span>
-          <span>734 km</span>
-          <span style={{ color: "rgba(201,169,110,0.4)" }}>·</span>
+          <span style={{ color: "rgba(232,132,92,0.4)" }}>·</span>
+          <span>731 km</span>
+          <span style={{ color: "rgba(232,132,92,0.4)" }}>·</span>
           <span>4 Nächte</span>
         </div>
       </div>

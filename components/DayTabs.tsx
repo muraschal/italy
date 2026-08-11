@@ -33,7 +33,7 @@ export default function DayTabs({
     <div
       className={
         compact
-          ? "flex rounded-full glass-strong glow-gold p-1 gap-0.5 w-full max-w-[min(100%,24rem)]"
+          ? "flex rounded-full glass-strong glow-accent p-1 gap-0.5 w-full max-w-[min(100%,24rem)]"
           : "flex rounded-xl glass p-1 gap-1"
       }
     >

@@ -21,7 +21,7 @@ import type { Location } from "@/data/trip";
 import walkingRoutes from "@/data/walking-routes.json";
 import metroRoutes from "@/data/metro-routes.json";
 import carRoutes from "@/data/car-routes.json";
-import { DAY_COLORS, DAY_KEYS, DAY_LABELS, DAY_LABELS_DE, STAGE_PALETTES, HOVER_COLOR, ALL_MAP_ACCENT } from "@/lib/constants";
+import { DAY_COLORS, DAY_KEYS, DAY_LABELS, DAY_LABELS_DE, STAGE_PALETTES, HOVER_COLOR, ALL_MAP_ACCENT, TRANSPORT_COLORS } from "@/lib/constants";
 
 const MAP_STYLES = {
   dark: {
@@ -247,7 +247,7 @@ function createIcon(color: string, category: string, name: string, visitNumbers?
     const label = visitNumbers.join("·");
     const w = visitNumbers.length > 1 ? "auto" : "20px";
     const pad = visitNumbers.length > 1 ? "padding:0 5px;" : "";
-    numberBadge = `<div style="position:absolute;top:-8px;right:-8px;min-width:20px;width:${w};height:20px;border-radius:10px;background:${hc};color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;border:2px solid #0a0a1a;${pad}">${label}</div>`;
+    numberBadge = `<div style="position:absolute;top:-8px;right:-8px;min-width:20px;width:${w};height:20px;border-radius:10px;background:${hc};color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;border:2px solid #06181f;${pad}">${label}</div>`;
   }
 
   const scale = highlighted ? "transform:scale(1.4);" : "";
@@ -408,7 +408,7 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
               Die Route
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-gold">La Strada</span>
+              <span className="text-gradient-accent">La Strada</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
               Stationen auf der Route
@@ -441,7 +441,7 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
       {/* Map */}
       <div className={compact ? "h-full" : "px-3 sm:px-4 lg:px-6"} data-lenis-prevent>
         <motion.div
-          className={`relative overflow-hidden ${compact ? "h-full" : "h-[55vh] sm:h-[65vh] lg:h-[75vh] rounded-2xl glass glow-gold"}`}
+          className={`relative overflow-hidden ${compact ? "h-full" : "h-[55vh] sm:h-[65vh] lg:h-[75vh] rounded-2xl glass glow-accent"}`}
           initial={compact ? { opacity: 1 } : { opacity: 0, y: 30 }}
           whileInView={compact ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -513,9 +513,9 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
                       }
                     }
                   }
-                  return { stageColor: "#0078D4", exitWalkColor: ewColor };
+                  return { stageColor: TRANSPORT_COLORS.metro, exitWalkColor: ewColor };
                 }
-                if (isCar) return { stageColor: "#8b6cda", exitWalkColor: null };
+                if (isCar) return { stageColor: TRANSPORT_COLORS.car, exitWalkColor: null };
                 const c = palette[walkColorIdx % palette.length];
                 walkColorIdx++;
                 return { stageColor: c, exitWalkColor: null };
@@ -854,7 +854,7 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
                 onClick={() => setMapStyle(key)}
                 className={`px-3 py-1.5 text-[10px] tracking-wide transition-all duration-200 ${
                   mapStyle === key
-                    ? "bg-gold/20 text-gold font-semibold"
+                    ? "bg-accent/20 text-accent font-semibold"
                     : "text-text-muted hover:text-text-secondary"
                 }`}
               >
@@ -892,18 +892,18 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
             )}
             {hasMetro && (
               <span className="flex items-center gap-1.5">
-                <svg width="20" height="6"><line x1="0" y1="3" x2="20" y2="3" stroke="#0078D4" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.7" /></svg>
+                <svg width="20" height="6"><line x1="0" y1="3" x2="20" y2="3" stroke="#3aa8c4" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.7" /></svg>
                 🚇 Bahn
               </span>
             )}
             {hasCar && (
               <span className="flex items-center gap-1.5">
-                <svg width="20" height="6"><line x1="0" y1="3" x2="20" y2="3" stroke="#8b6cda" strokeWidth="1.5" strokeDasharray="2 4" opacity="0.6" /></svg>
+                <svg width="20" height="6"><line x1="0" y1="3" x2="20" y2="3" stroke="#b084e0" strokeWidth="1.5" strokeDasharray="2 4" opacity="0.6" /></svg>
                 🚗 Auto
               </span>
             )}
             <span className="flex items-center gap-1.5">
-              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full text-[8px] font-bold" style={{ background: color, color: "#0a0a1a" }}>1</span>
+              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full text-[8px] font-bold" style={{ background: color, color: "#06181f" }}>1</span>
               Reihenfolge
             </span>
           </motion.div>
@@ -926,18 +926,18 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
                 <X className="w-4 h-4 text-text-muted" />
               </button>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full glass-gold flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-full glass-accent flex items-center justify-center shrink-0">
                   {selectedLocation.photoSpot ? (
-                    <Camera className="w-3.5 h-3.5 text-gold" />
+                    <Camera className="w-3.5 h-3.5 text-accent" />
                   ) : (
-                    <MapPin className="w-3.5 h-3.5 text-gold" />
+                    <MapPin className="w-3.5 h-3.5 text-accent" />
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm font-medium text-text-primary">{selectedLocation.name}</h4>
                   <p className="text-xs text-text-secondary mt-0.5">{selectedLocation.address}</p>
                   {selectedLocation.photoSpot && (
-                    <span className="inline-block mt-1.5 text-[9px] px-2 py-0.5 rounded-full bg-gold/10 text-gold uppercase tracking-wider">
+                    <span className="inline-block mt-1.5 text-[9px] px-2 py-0.5 rounded-full bg-accent/10 text-accent uppercase tracking-wider">
                       Photo Spot
                     </span>
                   )}
@@ -945,7 +945,7 @@ export default function RouteMap({ activeDay: externalDay, onDayChange, compact,
                     href={selectedLocation.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 flex items-center gap-1.5 text-xs text-gold hover:text-gold-light transition-colors"
+                    className="mt-3 flex items-center gap-1.5 text-xs text-accent hover:text-accent-light transition-colors"
                   >
                     <ExternalLink className="w-3 h-3" />
                     Navigation starten

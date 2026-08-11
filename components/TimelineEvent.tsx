@@ -60,13 +60,13 @@ function TicketPopover({ ticket, onClose }: { ticket: TicketInfo; onClose: () =>
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: -4 }}
       transition={{ duration: 0.15 }}
-      className="absolute right-0 top-8 z-20 w-56 p-3 rounded-xl glass-strong border border-gold/20 shadow-lg"
+      className="absolute right-0 top-8 z-20 w-56 p-3 rounded-xl glass-strong border border-accent/20 shadow-lg"
       onClick={(e) => e.stopPropagation()}
     >
       <button onClick={onClose} className="absolute top-2 right-2 p-0.5 rounded hover:bg-glass-hover transition-colors">
         <X className="w-3 h-3 text-text-muted" />
       </button>
-      <p className="text-[10px] text-gold uppercase tracking-wider font-semibold mb-2">Ticket-Info</p>
+      <p className="text-[10px] text-accent uppercase tracking-wider font-semibold mb-2">Ticket-Info</p>
       <div className="space-y-1.5">
         {ticket.refs.map((ref) => (
           <div key={ref.value} className="flex items-center justify-between">
@@ -94,7 +94,6 @@ interface TimelineEventProps {
   event: TripEvent;
   eventKey: string;
   isLast: boolean;
-  dayColor: string;
 
   hoveredEventKey?: string | null;
   hoveredLocationId?: string | null;
@@ -116,7 +115,7 @@ function useTallViewport() {
   return isTall;
 }
 
-export default function TimelineEventCard({ event, eventKey, isLast, dayColor, hoveredEventKey, hoveredLocationId, hoveredSegment, onHoverEvent }: TimelineEventProps) {
+export default function TimelineEventCard({ event, eventKey, isLast, hoveredEventKey, hoveredLocationId, hoveredSegment, onHoverEvent }: TimelineEventProps) {
   const [showTicket, setShowTicket] = useState(false);
   const [factOpen, setFactOpen] = useState(false);
   const isTallScreen = useTallViewport();
@@ -170,9 +169,9 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
             isHovered
               ? "scale-110"
               : isBooked
-                ? "glass-gold glow-gold-strong ring-1 ring-gold/30"
+                ? "glass-accent glow-accent-strong ring-1 ring-accent/30"
                 : event.highlight
-                  ? "glass-gold glow-gold-strong"
+                  ? "glass-accent glow-accent-strong"
                   : "glass"
           }`}
           style={isHovered ? {
@@ -181,7 +180,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
             border: `2px solid ${HOVER_COLOR}`,
           } : undefined}
         >
-          <Icon className={`w-4 h-4 transition-colors duration-200 ${isHovered ? `text-[${HOVER_COLOR}]` : event.highlight || isBooked ? "text-gold" : "text-text-secondary"}`} />
+          <Icon className={`w-4 h-4 transition-colors duration-200 ${isHovered ? `text-[${HOVER_COLOR}]` : event.highlight || isBooked ? "text-accent" : "text-text-secondary"}`} />
         </div>
         {!isLast && (
           <div className="w-px flex-1 min-h-[28px] bg-gradient-to-b from-glass-border to-transparent mt-2" />
@@ -218,7 +217,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${getEventImage(event)})` }}
               />
-              <div className={`absolute inset-0 ${isBooked ? "bg-gold/[0.04]" : "bg-navy/30"}`} />
+              <div className={`absolute inset-0 ${isBooked ? "bg-accent/[0.04]" : "bg-ink/30"}`} />
             </div>
           )}
         </div>
@@ -226,12 +225,12 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
           {/* Row 1: Time + badges + action buttons */}
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 flex-wrap min-w-0">
-              <span className={`text-xs font-mono tabular-nums ${isBooked ? "text-gold font-semibold" : isFixedTime ? "text-text-primary" : "text-text-muted"}`}>
+              <span className={`text-xs font-mono tabular-nums ${isBooked ? "text-accent font-semibold" : isFixedTime ? "text-text-primary" : "text-text-muted"}`}>
                 {event.time}
                 {event.endTime && `–${event.endTime}`}
               </span>
               {isBooked && (
-                <span className="inline-flex items-center justify-center min-h-5 px-1.5 py-0 text-[8px] leading-none rounded-full bg-gold/15 text-gold uppercase tracking-[0.15em] font-semibold border border-gold/20">
+                <span className="inline-flex items-center justify-center min-h-5 px-1.5 py-0 text-[8px] leading-none rounded-full bg-accent/15 text-accent uppercase tracking-[0.15em] font-semibold border border-accent/20">
                   Gebucht
                 </span>
               )}
@@ -246,7 +245,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
                 </span>
               )}
               {event.transport === "metro" && (
-                <span className="inline-flex items-center justify-center min-h-5 px-1.5 py-0 text-[9px] leading-none rounded-full bg-[#0078D4]/15 text-[#0078D4] border border-[#0078D4]/20 uppercase tracking-wider">
+                <span className="inline-flex items-center justify-center min-h-5 px-1.5 py-0 text-[9px] leading-none rounded-full bg-[#3aa8c4]/15 text-[#3aa8c4] border border-[#3aa8c4]/20 uppercase tracking-wider">
                   🚇 Bahn {event.transportDuration && `· ${event.transportDuration}`}
                 </span>
               )}
@@ -265,7 +264,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
                   className="p-1.5 rounded-lg glass hover:glass-strong transition-all group"
                   aria-label="Ticket-Info"
                 >
-                  <Ticket className="w-3.5 h-3.5 text-gold/60 group-hover:text-gold transition-colors" />
+                  <Ticket className="w-3.5 h-3.5 text-accent/60 group-hover:text-accent transition-colors" />
                 </button>
               )}
               {location?.instagramUrl && (
@@ -287,7 +286,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
                   className="p-1.5 rounded-lg glass hover:glass-strong transition-all group"
                   aria-label={`${location.name} auf Google Maps öffnen`}
                 >
-                  <ExternalLink className="w-3.5 h-3.5 text-text-muted group-hover:text-gold transition-colors" />
+                  <ExternalLink className="w-3.5 h-3.5 text-text-muted group-hover:text-accent transition-colors" />
                 </a>
               )}
               <AnimatePresence>
@@ -310,8 +309,8 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
 
           {/* Row 4: Note */}
           {event.note && (
-            <p className="text-[11px] text-gold/80 mt-1.5 flex items-center gap-1">
-              <span className="text-gold">⚡</span> {event.note}
+            <p className="text-[11px] text-accent/80 mt-1.5 flex items-center gap-1">
+              <span className="text-accent">⚡</span> {event.note}
             </p>
           )}
 
@@ -327,9 +326,9 @@ export default function TimelineEventCard({ event, eventKey, isLast, dayColor, h
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); setFactOpen(!factOpen); }}
-                  className="flex items-center gap-1.5 text-[10px] text-text-muted hover:text-gold/80 transition-colors"
+                  className="flex items-center gap-1.5 text-[10px] text-text-muted hover:text-accent/80 transition-colors"
                 >
-                  <span className="text-gold/60">{factOpen ? "▾" : "▸"}</span>
+                  <span className="text-accent/60">{factOpen ? "▾" : "▸"}</span>
                   <span className="uppercase tracking-[0.1em] font-medium">Fun Fact</span>
                 </button>
                 <AnimatePresence initial={false}>

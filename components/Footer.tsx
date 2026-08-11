@@ -6,12 +6,12 @@ import { locations } from "@/data/trip";
 
 export default function Footer() {
   return (
-    <footer className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden" style={{ backgroundColor: "#0d0a11" }}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0a11] via-transparent to-[#0d0a11] pointer-events-none" />
+    <footer className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden" style={{ backgroundColor: "#061a20" }}>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#061a20] via-transparent to-[#061a20] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(201,169,110,0.16) 0%, rgba(201,169,110,0.04) 45%, transparent 75%)" }}
+        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(232,132,92,0.16) 0%, rgba(232,132,92,0.04) 45%, transparent 75%)" }}
       />
 
       <div className="max-w-2xl mx-auto text-center relative z-10">
@@ -26,11 +26,11 @@ export default function Footer() {
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             className="inline-block mb-6"
           >
-            <Heart className="w-6 h-6 text-gold fill-gold/20" />
+            <Heart className="w-6 h-6 text-aqua fill-aqua/20" />
           </motion.div>
 
           <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-2">
-            <span className="text-gradient-gold">Buon viaggio</span>
+            <span className="text-gradient-aqua">Buon viaggio</span>
           </h3>
           <p className="text-text-secondary text-sm">
             Tessin · Milano · Bergamo — August 2026
@@ -51,7 +51,7 @@ export default function Footer() {
                     href={loc.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-text-muted hover:text-gold hover:bg-glass transition-all group"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-text-muted hover:text-accent hover:bg-glass transition-all group"
                   >
                     <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                     <span className="truncate">{loc.name}</span>

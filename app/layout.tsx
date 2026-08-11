@@ -42,7 +42,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#0a0a1a",
+  themeColor: "#06181f",
 };
 
 export default function RootLayout({
@@ -52,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${inter.variable} antialiased`}>
-      <body className="min-h-[100svh] bg-navy">
+      <body className="min-h-[100svh] bg-ink">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

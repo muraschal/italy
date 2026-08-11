@@ -5,13 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Ticket, AlertTriangle, Clock, CheckCircle2, Wallet } from "lucide-react";
 import { tickets } from "@/data/trip";
 import CopyButton from "./CopyButton";
-import { DAY_COLORS as DAY_COLOR_VALUES } from "@/lib/constants";
+import { DAY_COLORS as DAY_COLOR_VALUES, DAY_LABELS_DE } from "@/lib/constants";
 
-const DAY_COLORS: Record<string, string> = {
-  Freitag: DAY_COLOR_VALUES[0],
-  Samstag: DAY_COLOR_VALUES[1],
-  Sonntag: DAY_COLOR_VALUES[2],
-};
+/** Wochentag aus `ticket.day` → Akzentfarbe des jeweiligen Reisetags. */
+const DAY_COLORS: Record<string, string> = Object.fromEntries(
+  DAY_LABELS_DE.map((label, i) => [label, DAY_COLOR_VALUES[i]])
+);
 
 /** Deterministic fake barcode bar widths for Wallet-style strip */
 function seedToBarWidths(seed: string, count = 40): number[] {
@@ -56,7 +55,7 @@ function TicketCard({
   index: number;
 }) {
   const [open, setOpen] = useState(false);
-  const dayColor = DAY_COLORS[ticket.day] || "#c9a96e";
+  const dayColor = DAY_COLORS[ticket.day] || "#e8845c";
   const barcodeSeed =
     ticket.refs.map((r) => r.value).join("|") || `${index}-${ticket.title}`;
 
@@ -110,9 +109,9 @@ function TicketCard({
             className="w-full flex items-start gap-3 p-4 pr-3 text-left hover:bg-white/[0.03] transition-colors"
           >
             <div className="relative w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center shrink-0 shadow-inner">
-              <Wallet className="w-5 h-5 text-gold/90" strokeWidth={1.5} />
-              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-accent-green flex items-center justify-center ring-2 ring-[#121018]">
-                <CheckCircle2 className="w-3 h-3 text-navy" />
+              <Wallet className="w-5 h-5 text-accent/90" strokeWidth={1.5} />
+              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-accent-green flex items-center justify-center ring-2 ring-[#071c23]">
+                <CheckCircle2 className="w-3 h-3 text-ink" />
               </div>
             </div>
             <div className="min-w-0 flex-1 pt-0.5">
@@ -243,15 +242,15 @@ export default function TicketVault() {
     <section
       id="tickets"
       className="relative py-16 sm:py-24 md:min-h-dvh md:flex md:flex-col md:justify-center overflow-x-hidden"
-      style={{ backgroundColor: "#0e0c15" }}
+      style={{ backgroundColor: "#071c23" }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0e0c15] via-transparent to-[#0e0c15] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#071c23] via-transparent to-[#071c23] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 90%, rgba(201,169,110,0.10) 0%, rgba(201,169,110,0.02) 50%, transparent 80%)",
+            "radial-gradient(ellipse at 50% 90%, rgba(232,132,92,0.10) 0%, rgba(232,132,92,0.02) 50%, transparent 80%)",
         }}
       />
 
@@ -265,7 +264,7 @@ export default function TicketVault() {
         >
           <p className="text-text-secondary text-xs tracking-[0.25em] uppercase mb-3">Alle Reservierungen</p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-            <span className="text-gradient-gold">Le Prenotazioni</span>
+            <span className="text-gradient-accent">Le Prenotazioni</span>
           </h2>
           <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
             {confirmedCount} von {total} bestätigt

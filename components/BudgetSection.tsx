@@ -36,7 +36,7 @@ function CurrencyToggle({
           aria-pressed={currency === c}
           className={`px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] rounded-full transition-all duration-200 ${
             currency === c
-              ? "bg-gold/25 text-gold shadow-sm"
+              ? "bg-accent/25 text-accent shadow-sm"
               : "text-text-muted hover:text-text-secondary"
           }`}
         >
@@ -93,13 +93,13 @@ export default function BudgetSection() {
     <section
       id="budget"
       className="relative min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6 overflow-hidden"
-      style={{ backgroundColor: "#05050e" }}
+      style={{ backgroundColor: "#04131a" }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05050e] via-transparent to-[#05050e] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#04131a] via-transparent to-[#04131a] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(232,132,92,0.06) 0%, transparent 70%)" }}
       />
 
       <div className="max-w-3xl mx-auto relative z-10">
@@ -114,7 +114,7 @@ export default function BudgetSection() {
             Auf einen Blick
           </p>
           <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-            <span className="text-gradient-gold">Il Conto</span>
+            <span className="text-gradient-accent">Il Conto</span>
           </h2>
           <div className="flex flex-col items-center gap-2 mt-4">
             <CurrencyToggle currency={currency} onChange={setCurrency} />
@@ -149,7 +149,7 @@ export default function BudgetSection() {
               style={{ width: `${paidPercent}%` }}
             />
             <div
-              className="h-full rounded-full bg-gold/40 transition-all duration-700"
+              className="h-full rounded-full bg-accent/40 transition-all duration-700"
               style={{ width: `${100 - paidPercent}%` }}
             />
           </div>
@@ -159,7 +159,7 @@ export default function BudgetSection() {
               Bereits bezahlt · {paidPercent}%
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-gold/40" />
+              <span className="w-2 h-2 rounded-full bg-accent/40" />
               Vor Ort · {100 - paidPercent}%
             </span>
           </div>
@@ -227,18 +227,18 @@ export default function BudgetSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="glass rounded-2xl overflow-hidden border border-gold/[0.08]"
+            className="glass rounded-2xl overflow-hidden border border-accent/[0.08]"
           >
             <button
               onClick={() => setShowOnSiteDetails(!showOnSiteDetails)}
               className="w-full flex items-center justify-between p-5 text-left hover:bg-glass-hover transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center">
-                  <Clock className="w-4 h-4 text-gold/70" />
+                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                  <Clock className="w-4 h-4 text-accent/70" />
                 </div>
                 <div>
-                  <p className="text-xs text-gold/70 uppercase tracking-wider font-medium">Vor Ort</p>
+                  <p className="text-xs text-accent/70 uppercase tracking-wider font-medium">Vor Ort</p>
                   <p className="text-lg font-light text-text-primary tabular-nums mt-0.5">
                     ~{formatBudgetMoney(totalOnSite, currency)}
                   </p>
@@ -281,9 +281,9 @@ export default function BudgetSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-8 text-center"
         >
-          <div className="glass rounded-2xl p-6 inline-flex flex-col items-center border border-gold/[0.06]">
+          <div className="glass rounded-2xl p-6 inline-flex flex-col items-center border border-accent/[0.06]">
             <p className="text-[10px] text-text-muted uppercase tracking-[0.2em] mb-2">Gesamtbudget</p>
-            <p className="text-3xl sm:text-4xl font-light text-gradient-gold tabular-nums">
+            <p className="text-3xl sm:text-4xl font-light text-gradient-accent tabular-nums">
               ~{formatBudgetMoney(totalBudget, currency)}
             </p>
             <p className="text-[11px] text-text-muted mt-3 italic tracking-wide">

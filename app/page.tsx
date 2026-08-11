@@ -17,11 +17,11 @@ export default function Home() {
         <Hero />
 
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-navy pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-ink pointer-events-none" />
           <div className="relative z-10">
             <HotelCard />
 
-            <div className="w-16 h-px mx-auto bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+            <div className="w-16 h-px mx-auto bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
 
             <AgendaViewLoader />
 

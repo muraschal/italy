@@ -46,13 +46,13 @@ function BarRow({
   flag: string;
   value: number;
   max: number;
-  accent: "gold" | "blue";
+  accent: "accent" | "blue";
 }) {
   const pct = Math.max(8, Math.round((value / max) * 100));
   const barClass =
-    accent === "gold"
-      ? "bg-gradient-to-r from-gold/50 to-gold/25"
-      : "bg-gradient-to-r from-[#7eb8e0]/55 to-[#7eb8e0]/20";
+    accent === "accent"
+      ? "bg-gradient-to-r from-accent/50 to-accent/25"
+      : "bg-gradient-to-r from-[#46c4bb]/55 to-[#46c4bb]/20";
 
   return (
     <div className="space-y-1">
@@ -61,7 +61,7 @@ function BarRow({
           <span className="text-text-primary/90 font-medium">{label}</span>
           <span className="text-text-muted/70 ml-1.5 text-[10px] font-mono">{flag}</span>
         </span>
-        <span className="text-[11px] font-mono tabular-nums text-gold/90 shrink-0">
+        <span className="text-[11px] font-mono tabular-nums text-accent/90 shrink-0">
           ca. {formatEur(value)}
         </span>
       </div>
@@ -106,8 +106,8 @@ export default function ItalyTravelInsights() {
         {/* Kaffee-Vergleich */}
         <div className="glass rounded-2xl border border-white/[0.06] p-5 sm:p-6">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-xl bg-gold/10 flex items-center justify-center border border-gold/15">
-              <Coffee className="w-4 h-4 text-gold/80" />
+            <div className="w-8 h-8 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/15">
+              <Coffee className="w-4 h-4 text-accent/80" />
             </div>
             <div>
               <p className="text-xs font-medium text-text-primary">Espresso an der Bar</p>
@@ -122,7 +122,7 @@ export default function ItalyTravelInsights() {
                 flag={row.flag}
                 value={row.eur}
                 max={maxCoffee}
-                accent="gold"
+                accent="accent"
               />
             ))}
           </div>
@@ -134,8 +134,8 @@ export default function ItalyTravelInsights() {
         {/* Spritpreis-Vergleich */}
         <div className="glass rounded-2xl border border-white/[0.06] p-5 sm:p-6">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-xl bg-[#7eb8e0]/10 flex items-center justify-center border border-[#7eb8e0]/20">
-              <Fuel className="w-4 h-4 text-[#7eb8e0]/85" />
+            <div className="w-8 h-8 rounded-xl bg-[#46c4bb]/10 flex items-center justify-center border border-[#46c4bb]/20">
+              <Fuel className="w-4 h-4 text-[#46c4bb]/85" />
             </div>
             <div>
               <p className="text-xs font-medium text-text-primary">Benzin 95 · pro Liter</p>
@@ -177,10 +177,10 @@ export default function ItalyTravelInsights() {
             >
               <div className="flex gap-3">
                 <div className="shrink-0 w-8 h-8 rounded-lg bg-white/[0.04] flex items-center justify-center border border-white/[0.06]">
-                  <Icon className="w-3.5 h-3.5 text-gold/65" />
+                  <Icon className="w-3.5 h-3.5 text-accent/65" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-semibold text-text-primary tracking-wide uppercase text-gold/75 mb-1">
+                  <p className="text-[11px] font-semibold text-text-primary tracking-wide uppercase text-accent/75 mb-1">
                     {item.title}
                   </p>
                   <p className="text-[11px] text-text-secondary leading-relaxed">{item.detail}</p>

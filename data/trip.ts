@@ -98,16 +98,16 @@ export const locations: Location[] = [
       "Die Piazza Motta zur Goldenen Stunde — Seepromenade im Gegenlicht, Palmen und Pastellfassaden im Rücken.",
   },
   {
-    id: "morcote",
-    name: "Morcote",
-    address: "6922 Morcote, Tessin",
-    coordinates: { lat: 45.9278156, lng: 8.9078997 },
-    googleMapsUrl: "https://maps.google.com/?q=Morcote+6922",
+    id: "como",
+    name: "Como",
+    address: "22100 Como, Lombardei",
+    coordinates: { lat: 45.8103, lng: 9.0832 },
+    googleMapsUrl: "https://maps.google.com/?q=Como+Lago+di+Como",
     category: "landmark",
     photoSpot: true,
-    instagramUrl: "https://www.instagram.com/explore/tags/morcote/",
+    instagramUrl: "https://www.instagram.com/explore/tags/lagodicomo/",
     photoTip:
-      "Arkadengassen direkt am Luganersee. Die Treppe zur Chiesa Santa Maria del Sasso hinauf — von oben Seeblick über die Ziegeldächer.",
+      "Von der Seepromenade an der Piazza Cavour über das Wasser — oder mit der Funicolare nach Brunate hoch und die ganze Seegabel von oben.",
   },
   {
     id: "sina-de-la-ville",
@@ -233,7 +233,7 @@ export const days: TripDay[] = [
   {
     date: "2026-08-14",
     label: "Venerdì",
-    subtitle: "Il Ticino — Vormittag in Mergoscia, Pizza in Ascona, Abend in Morcote",
+    subtitle: "Verso il lago — Vormittag in Mergoscia, Pizza in Ascona, Abend in Como",
     totalCost: 140,
     events: [
       {
@@ -275,16 +275,17 @@ export const days: TripDay[] = [
       },
       {
         time: "~21:00",
-        title: "Weiter nach Morcote",
-        description: "Über den Monte Ceneri an den Luganersee · Villa von Pascals Eltern",
-        locationId: "morcote",
+        title: "Weiter nach Como",
+        description: "Über den Monte Ceneri und Lugano an den Lago di Como · Übernachtung in Como",
+        locationId: "como",
         transport: "car",
-        transportDuration: "~50 Min · 51 km",
+        transportDuration: "~1 Std 10 · 73 km",
         cost: null,
         highlight: true,
         icon: "hotel",
+        ticketRef: "como",
         funFact:
-          "Morcote galt lange als «Perle des Ceresio». Die 404 Stufen zur Chiesa Santa Maria del Sasso hinauf sind der Preis für den besten Seeblick des Tessins.",
+          "Como lebte jahrhundertelang von der Seide und webt bis heute einen Grossteil der europäischen Krawatten- und Tuchseide — die Fabriken liegen unscheinbar am Stadtrand.",
       },
     ],
   },
@@ -296,13 +297,15 @@ export const days: TripDay[] = [
     events: [
       {
         time: "~10:00",
-        title: "Entspannter Vormittag in Morcote",
-        description: "Frühstück am See, Arkadengassen, keine Eile",
-        locationId: "morcote",
+        title: "Entspannter Vormittag in Como",
+        description: "Frühstück am See, Seepromenade, Altstadt — keine Eile",
+        locationId: "como",
         transport: "none",
         cost: null,
         highlight: false,
         icon: "coffee",
+        funFact:
+          "Die Funicolare von Como nach Brunate fährt seit 1894 und überwindet auf gut anderthalb Kilometern rund 500 Höhenmeter — oben liegt der Blick über die ganze Seegabel.",
       },
       {
         time: "~14:00",
@@ -310,7 +313,7 @@ export const days: TripDay[] = [
         description: "Via Ulrico Hoepli 6 · zwei Gehminuten hinter der Scala · Rooftop-Pool",
         locationId: "sina-de-la-ville",
         transport: "car",
-        transportDuration: "~1 Std 10 · 77 km",
+        transportDuration: "~50 Min · 52 km",
         cost: null,
         costPaid: true,
         highlight: true,
@@ -531,6 +534,18 @@ export const tickets: Record<string, TicketInfo> = {
       "TODO: reservieren — im August ist die Piazza voll",
     ],
   },
+  como: {
+    title: "Como — 1 Nacht",
+    day: "Freitag",
+    datetime: "Fr 14. Aug ~22:00 – Sa 15. Aug",
+    confirmed: false,
+    refs: [],
+    notes: [
+      "22100 Como, Lombardei",
+      "Ersetzt die ursprünglich geplante Nacht in Morcote",
+      "TODO: Unterkunft suchen und buchen",
+    ],
+  },
   "sina-de-la-ville": {
     title: "Sina De La Ville — 1 Nacht",
     day: "Samstag",
@@ -574,16 +589,16 @@ export const hotels = [
     note: "Erste Nacht nach der Fahrt durch den Gotthard — Terrassendorf über dem Lago di Vogorno.",
   },
   {
-    id: "morcote",
-    name: "Villa in Morcote",
-    city: "Luganersee",
-    address: "6922 Morcote, Tessin",
-    googleMapsUrl: "https://maps.google.com/?q=Morcote+6922",
+    id: "como",
+    name: "Como",
+    city: "Lago di Como",
+    address: "22100 Como, Lombardei",
+    googleMapsUrl: "https://maps.google.com/?q=Como+Lago+di+Como",
     checkIn: "Fr ~22:00",
     checkOut: "Sa ~13:00",
     nights: 1,
-    coordinates: { lat: 45.9278156, lng: 8.9078997 },
-    note: "Bei Pascals Eltern direkt am Ceresio — die entspannteste Nacht der Reise.",
+    coordinates: { lat: 45.8103, lng: 9.0832 },
+    note: "Erste Nacht in Italien, direkt am See. Unterkunft steht noch aus.",
   },
   {
     id: "sina-de-la-ville",
@@ -616,7 +631,7 @@ export const hotels = [
 /** Kennzahlen der Fahrstrecke, gerundet aus data/car-routes.json. */
 export const drive = {
   car: "Porsche 911 GTS",
-  totalKm: 734,
+  totalKm: 731,
   totalHours: 10.4,
   legs: 6,
   passes: ["Gotthard", "Monte Ceneri"],

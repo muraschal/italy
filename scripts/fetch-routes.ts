@@ -31,7 +31,7 @@ const locations: Record<string, Coord> = {
   tiefenbrunnen: { lat: 47.3547, lng: 8.5556 },
   mergoscia: { lat: 46.2086286, lng: 8.844509 },
   ascona: { lat: 46.154, lng: 8.7705 },
-  morcote: { lat: 45.9278156, lng: 8.9078997 },
+  como: { lat: 45.8103, lng: 9.0832 },
   "sina-de-la-ville": { lat: 45.4659654, lng: 9.1923116 },
   "duomo-milano": { lat: 45.4641, lng: 9.1919 },
   galleria: { lat: 45.4659, lng: 9.1899 },
@@ -54,11 +54,11 @@ interface Segment {
 const segments: Segment[] = [
   // Do — nach der Rundfunk-Party über den Gotthard ins Verzascatal
   { from: "tiefenbrunnen", to: "mergoscia", day: "giorno-1", mode: "car" },
-  // Fr — Mergoscia → Ascona (Seven7) → Morcote
+  // Fr — Mergoscia → Ascona (Seven7) → Como
   { from: "mergoscia", to: "ascona", day: "giorno-2", mode: "car" },
-  { from: "ascona", to: "morcote", day: "giorno-2", mode: "car" },
-  // Sa — Morcote → Milano, abends zu Fuss durchs Zentrum
-  { from: "morcote", to: "sina-de-la-ville", day: "giorno-3", mode: "car" },
+  { from: "ascona", to: "como", day: "giorno-2", mode: "car" },
+  // Sa — Como → Milano, abends zu Fuss durchs Zentrum
+  { from: "como", to: "sina-de-la-ville", day: "giorno-3", mode: "car" },
   { from: "sina-de-la-ville", to: "duomo-milano", day: "giorno-3", mode: "walk" },
   { from: "duomo-milano", to: "galleria", day: "giorno-3", mode: "walk" },
   { from: "navigli", to: "sina-de-la-ville", day: "giorno-3", mode: "walk" },

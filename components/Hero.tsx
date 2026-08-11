@@ -32,17 +32,17 @@ export default function Hero() {
   return (
     <section className="relative h-[100svh] min-h-[100svh] w-full max-w-full overflow-hidden lg:h-dvh lg:min-h-0">
       {/* Background gradient — Nachthimmel über den Alpen */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d2b] via-[#0a0a1a] to-navy" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a2b36] via-[#06181f] to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink pointer-events-none" />
 
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_50%_30%,rgba(201,169,110,0.3)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_50%_30%,rgba(232,132,92,0.3)_0%,transparent_70%)]" />
 
       {/* Subtle star-like particles */}
       <div className="absolute inset-0 z-[6] overflow-hidden pointer-events-none">
         {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-[1px] h-[1px] bg-white rounded-full animate-pulse-gold"
+            className="absolute w-[1px] h-[1px] bg-white rounded-full animate-pulse-accent"
             style={{
               left: `${(i * 37 + 13) % 100}%`,
               top: `${(i * 23 + 7) % 80}%`,
@@ -68,17 +68,17 @@ export default function Hero() {
           </p>
 
           <h1 className="text-[clamp(2.2rem,8vw,4.5rem)] font-light tracking-tight mb-3 leading-[1.1]">
-            <span className="text-gradient-gold">Strada<br className="sm:hidden" /> del Sud</span>
+            <span className="text-gradient-accent">Strada<br className="sm:hidden" /> del Sud</span>
           </h1>
 
           <p className="text-xl sm:text-2xl font-extralight text-text-primary/70 tracking-wide">
-            Fünf Tage · Tessin, Milano &amp; Bergamo
+            Fünf Tage · Tessin, Como, Milano &amp; Bergamo
           </p>
 
           <div className="flex items-center justify-center gap-3 mt-7 mb-8">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold opacity-40" />
-            <span className="text-gold text-xs tracking-[0.2em] uppercase">734 km · 4 Nächte</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold opacity-40" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent opacity-40" />
+            <span className="text-accent text-xs tracking-[0.2em] uppercase">731 km · 4 Nächte</span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent opacity-40" />
           </div>
         </motion.div>
 
@@ -89,7 +89,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           {isPast ? (
-            <p className="text-gold text-lg tracking-wide">Buon viaggio! 🥂</p>
+            <p className="text-accent text-lg tracking-wide">Buon viaggio! 🥂</p>
           ) : (
             <div className="flex items-center justify-center gap-1 sm:gap-3">
               {[
@@ -108,7 +108,7 @@ export default function Hero() {
                     </span>
                   </div>
                   {i < 3 && (
-                    <span className="text-gold-dim text-2xl font-extralight mb-4">:</span>
+                    <span className="text-accent-dim text-2xl font-extralight mb-4">:</span>
                   )}
                 </div>
               ))}
@@ -128,7 +128,7 @@ export default function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >
-        <ChevronDown className="w-5 h-5 text-gold opacity-40" />
+        <ChevronDown className="w-5 h-5 text-accent opacity-40" />
       </motion.div>
     </section>
   );

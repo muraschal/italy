@@ -39,7 +39,7 @@ export default function PhotoSpots() {
 
   return (
     <>
-      <section id="fotos" className="relative py-20 sm:py-28 px-4 sm:px-6" style={{ backgroundColor: "#060614" }}>
+      <section id="fotos" className="relative py-20 sm:py-28 px-4 sm:px-6" style={{ backgroundColor: "#04141a" }}>
         <div className="absolute inset-0 texture-grid pointer-events-none" />
         <div
           className="absolute inset-0 pointer-events-none"
@@ -57,7 +57,7 @@ export default function PhotoSpots() {
               Foto Inspiration
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-gold">I Momenti</span>
+              <span className="text-gradient-accent">I Momenti</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
               {photoSpots.length} Locations mit hohem Motiv-Potenzial
@@ -90,8 +90,8 @@ export default function PhotoSpots() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full bg-gold/20 backdrop-blur-sm flex items-center justify-center">
-                        <Camera className="w-3.5 h-3.5 text-gold" />
+                      <div className="w-7 h-7 rounded-full bg-accent/20 backdrop-blur-sm flex items-center justify-center">
+                        <Camera className="w-3.5 h-3.5 text-accent" />
                       </div>
                       <span className="text-white/90 text-sm font-medium drop-shadow-lg">
                         {spot.name}
@@ -110,8 +110,8 @@ export default function PhotoSpots() {
                   {/* Ohne Galerie trägt die Karte den Namen selbst */}
                   {!spot.photoGallery?.length && (
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-7 h-7 rounded-full bg-gold/15 flex items-center justify-center shrink-0">
-                        <Camera className="w-3.5 h-3.5 text-gold" />
+                      <div className="w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+                        <Camera className="w-3.5 h-3.5 text-accent" />
                       </div>
                       <span className="text-text-primary text-sm font-medium truncate">
                         {spot.name}
@@ -135,7 +135,7 @@ export default function PhotoSpots() {
                           onClick={() => openLightbox(spotIdx, imgIdx)}
                           className={`relative shrink-0 w-14 h-14 rounded-lg overflow-hidden transition-all ${
                             imgIdx === 0
-                              ? "ring-1 ring-gold/30"
+                              ? "ring-1 ring-accent/30"
                               : "ring-1 ring-white/10 hover:ring-white/30"
                           }`}
                         >
@@ -186,7 +186,7 @@ export default function PhotoSpots() {
                       href={spot.googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-[10px] text-text-muted hover:text-gold transition-colors"
+                      className="flex items-center gap-1 text-[10px] text-text-muted hover:text-accent transition-colors"
                     >
                       <ExternalLink className="w-3 h-3" />
                       Maps

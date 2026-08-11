@@ -57,7 +57,7 @@ export default function CopyButton({ value, variant = "pill" }: CopyButtonProps)
       {copied ? (
         <Check className="w-3.5 h-3.5 text-accent-green" />
       ) : (
-        <Copy className="w-3.5 h-3.5 text-text-muted hover:text-gold transition-colors" />
+        <Copy className="w-3.5 h-3.5 text-text-muted hover:text-accent transition-colors" />
       )}
     </button>
   );

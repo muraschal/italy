@@ -58,7 +58,7 @@ export default function Navigation() {
           exit={{ opacity: 0, y: 20 }}
           className="fixed bottom-6 inset-x-4 z-50 flex justify-center pointer-events-none sm:inset-x-6"
         >
-          <div className="glass-strong glow-gold rounded-full px-2 py-2 flex items-center gap-1 max-w-full pointer-events-auto" role="tablist">
+          <div className="glass-strong glow-accent rounded-full px-2 py-2 flex items-center gap-1 max-w-full pointer-events-auto" role="tablist">
             {sections.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
@@ -69,7 +69,7 @@ export default function Navigation() {
                 onClick={() => scrollTo(id)}
                 className={`
                   relative flex items-center gap-1.5 px-3 py-2 rounded-full text-xs transition-all duration-300
-                  ${active === id ? "text-gold" : "text-text-muted hover:text-text-secondary"}
+                  ${active === id ? "text-accent" : "text-text-muted hover:text-text-secondary"}
                 `}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -77,7 +77,7 @@ export default function Navigation() {
                 {active === id && (
                   <motion.div
                     layoutId="nav-section-indicator"
-                    className="absolute inset-0 rounded-full glass-gold"
+                    className="absolute inset-0 rounded-full glass-accent"
                     style={{ zIndex: -1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />

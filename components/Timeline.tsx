@@ -20,11 +20,10 @@ import {
 import { days, getLocation, getUniqueVisitedPoisInOrder, ALL_DAY_INDEX } from "@/data/trip";
 import type { TripEvent, Location } from "@/data/trip";
 import walkingRoutes from "@/data/walking-routes.json";
-import { STAGE_PALETTES, DAY_KEYS } from "@/lib/constants";
+import { STAGE_PALETTES, DAY_KEYS, TRANSPORT_COLORS } from "@/lib/constants";
 import DayTabs from "./DayTabs";
 import TimelineEvent from "./TimelineEvent";
 
-const dayColors = ["text-day-1", "text-day-2", "text-day-3"];
 const dayKeys = DAY_KEYS;
 
 const POI_CATEGORY_ICON: Record<Location["category"], ElementType> = {
@@ -66,12 +65,12 @@ const TRANSPORT_STYLES = {
   },
   metro: {
     Icon: TrainFront,
-    iconBg: "bg-[#0078D4]/15",
-    iconColor: "text-[#0078D4]",
-    pillBg: "bg-[#0078D4]/10 border-[#0078D4]/25",
-    textColor: "text-[#0078D4]/80",
-    arrowColor: "text-[#0078D4]/40",
-    durColor: "text-[#0078D4]/70",
+    iconBg: "bg-[#3aa8c4]/15",
+    iconColor: "text-[#3aa8c4]",
+    pillBg: "bg-[#3aa8c4]/10 border-[#3aa8c4]/25",
+    textColor: "text-[#3aa8c4]/80",
+    arrowColor: "text-[#3aa8c4]/40",
+    durColor: "text-[#3aa8c4]/70",
     label: "Bahn",
   },
   car: {
@@ -338,17 +337,17 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
               5 Tage Roadtrip
             </p>
             <h2 className="text-3xl sm:text-5xl font-light tracking-tight">
-              <span className="text-gradient-gold">L&apos;Itinerario</span>
+              <span className="text-gradient-accent">L&apos;Itinerario</span>
             </h2>
             <p className="text-text-secondary text-sm sm:text-base font-light mt-3 tracking-wide">
-              Mergoscia · Ascona · Morcote · Milano · Bergamo
+              Mergoscia · Ascona · Como · Milano · Bergamo
             </p>
           </motion.div>
         )}
 
         {/* Day Tabs */}
         {!hideTabs && (
-          <div className={`sticky z-20 pt-3 pb-4 bg-navy/80 backdrop-blur-xl ${embedded ? "top-0" : "top-0 -mx-4 px-4 sm:-mx-6 sm:px-6"}`}>
+          <div className={`sticky z-20 pt-3 pb-4 bg-ink/80 backdrop-blur-xl ${embedded ? "top-0" : "top-0 -mx-4 px-4 sm:-mx-6 sm:px-6"}`}>
             <DayTabs activeDay={activeDay} onChange={handleDayChange} groupId="timeline" />
           </div>
         )}
@@ -364,11 +363,11 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
               transition={{ duration: 0.3 }}
             >
               <div className="mt-5 mb-6">
-                <h3 className="text-lg sm:text-xl font-light text-gradient-gold tracking-wide">Alle Tage</h3>
+                <h3 className="text-lg sm:text-xl font-light text-gradient-accent tracking-wide">Alle Tage</h3>
                 <p className="text-xs sm:text-sm text-text-secondary/80 font-light mt-1 tracking-wide">
                   Alle Orte einmal · kompakte Übersicht
                 </p>
-                <div className="mt-3 h-px w-16 bg-gradient-to-r from-gold/40 to-transparent" />
+                <div className="mt-3 h-px w-16 bg-gradient-to-r from-accent/40 to-transparent" />
               </div>
               {(() => {
                 const pois = getUniqueVisitedPoisInOrder();
@@ -394,8 +393,8 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                             <div
                               className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0 text-[11px] sm:text-xs font-mono tabular-nums font-semibold transition-all duration-200 ${
                                 isHovered
-                                  ? "scale-110 text-[#FF2D78] bg-[#FF2D78]/15 ring-2 ring-[#FF2D78]/50 shadow-[0_0_16px_rgba(255,45,120,0.25)]"
-                                  : "text-gold/90 glass border border-white/[0.08]"
+                                  ? "scale-110 text-[#FF5D8F] bg-[#FF5D8F]/15 ring-2 ring-[#FF5D8F]/50 shadow-[0_0_16px_rgba(255,93,143,0.25)]"
+                                  : "text-accent/90 glass border border-white/[0.08]"
                               }`}
                             >
                               {i + 1}
@@ -411,7 +410,7 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                               onMouseLeave={() => onHoverEvent?.(null, null)}
                               className={`w-full text-left rounded-xl border overflow-hidden transition-all duration-200 ${
                                 isHovered
-                                  ? "border-[#FF2D78]/30 shadow-[0_0_20px_rgba(255,45,120,0.12)] bg-[#FF2D78]/[0.05]"
+                                  ? "border-[#FF5D8F]/30 shadow-[0_0_20px_rgba(255,93,143,0.12)] bg-[#FF5D8F]/[0.05]"
                                   : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.1] hover:bg-white/[0.04]"
                               }`}
                             >
@@ -420,8 +419,8 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                                   <div
                                     className={`mt-0.5 shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border transition-colors duration-200 ${
                                       isHovered
-                                        ? "border-[#FF2D78]/35 bg-[#FF2D78]/10 text-[#FF2D78]"
-                                        : "border-white/[0.08] bg-white/[0.04] text-gold/85"
+                                        ? "border-[#FF5D8F]/35 bg-[#FF5D8F]/10 text-[#FF5D8F]"
+                                        : "border-white/[0.08] bg-white/[0.04] text-accent/85"
                                     }`}
                                   >
                                     <Icon className="w-4 h-4" />
@@ -462,14 +461,14 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                 const parts = day.subtitle.split(" — ");
                 return (
                   <>
-                    <h3 className="text-lg sm:text-xl font-light text-gradient-gold tracking-wide">{parts[0]}</h3>
+                    <h3 className="text-lg sm:text-xl font-light text-gradient-accent tracking-wide">{parts[0]}</h3>
                     {parts[1] && (
                       <p className="text-xs sm:text-sm text-text-secondary/80 font-light mt-1 tracking-wide">{parts[1]}</p>
                     )}
                   </>
                 );
               })()}
-              <div className="mt-3 h-px w-16 bg-gradient-to-r from-gold/40 to-transparent" />
+              <div className="mt-3 h-px w-16 bg-gradient-to-r from-accent/40 to-transparent" />
             </div>
 
             <div className="mt-6">
@@ -496,8 +495,8 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                   const isNewSegment = prevLoc && curLoc && prevLoc.id !== curLoc.id;
 
                   let segColor: string;
-                  if (isMetro) segColor = "#0078D4";
-                  else if (isCar) segColor = "#8b6cda";
+                  if (isMetro) segColor = TRANSPORT_COLORS.metro;
+                  else if (isCar) segColor = TRANSPORT_COLORS.car;
                   else if (isNewSegment && isWalkWithPrev) {
                     segColor = palette[walkIdx % palette.length];
                     walkIdx++;
@@ -578,7 +577,6 @@ export default function Timeline({ activeDay: externalDay, onDayChange, embedded
                         event={event}
                         eventKey={`${activeDay}-${i}`}
                         isLast={i >= lastNonTransportIdx}
-                        dayColor={dayColors[activeDay]}
                         hoveredEventKey={hoveredEventKey}
                         hoveredLocationId={hoveredLocationId}
                         hoveredSegment={hoveredSegment}

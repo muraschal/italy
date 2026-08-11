@@ -9,12 +9,12 @@ Aufgebaut auf demselben Gerüst wie [paris.rapold.io](https://paris.rapold.io): 
 | Tag | Etappe | Übernachtung |
 | --- | --- | --- |
 | Do 13.8. | Rundfunk-Party, Tiefenbrunnen → Mergoscia | Mergoscia |
-| Fr 14.8. | Mergoscia → Ascona (Seven7) → Morcote | Morcote |
-| Sa 15.8. | Morcote → Milano · Rooftop-Pool, Duomo, Abend in der Stadt | Milano |
+| Fr 14.8. | Mergoscia → Ascona (Seven7) → Como | Como |
+| Sa 15.8. | Como → Milano · Rooftop-Pool, Duomo, Abend in der Stadt | Milano |
 | So 16.8. | Milano → Bergamo · Funicolare in die Città Alta | Bergamo |
 | Mo 17.8. | Città Alta, Rückfahrt nach Erlenbach | — |
 
-Rund 734 km und gut 10 Stunden reine Fahrzeit.
+Rund 731 km und gut 10 Stunden reine Fahrzeit.
 
 ## Entwicklung
 
@@ -70,6 +70,7 @@ Die rotierenden Fakten liegen als flaches String-Array in `public/data/italy-fac
 
 ## Offen
 
+- Unterkunft in Como suchen und buchen
 - Reservation im Seven7 (Ascona)
 - Buchung Sina De La Ville — aktuell favorisiert, noch nicht fix
 - Buchungsreferenz Relais San Vigilio nachtragen

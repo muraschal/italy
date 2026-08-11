@@ -38,7 +38,7 @@ export default function HotelCard() {
     <section
       id="hotel"
       className="relative min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6"
-      style={{ backgroundColor: "#082027" }}
+      style={{ backgroundColor: "#070b0d" }}
     >
       {sectionImage && (
         <Image
@@ -53,8 +53,8 @@ export default function HotelCard() {
       )}
       {/* Neutral abdunkeln statt einfärben — ein Teal-Schleier über dem Foto
           macht es unkenntlich, ohne es lesbarer zu machen. */}
-      <div className="absolute inset-0 bg-black/55 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#082027] via-transparent to-[#082027] pointer-events-none" />
+      <div className="absolute inset-0 bg-black/62 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070b0d] via-transparent to-[#070b0d] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -127,7 +127,7 @@ export default function HotelCard() {
                     quality={70}
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#082027]/92 via-[#082027]/86 to-[#082027]/95" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/84 to-black/93" />
                 </div>
               )}
 
@@ -222,7 +222,7 @@ export default function HotelCard() {
               className="object-cover"
               quality={82}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#082027] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070b0d] via-transparent to-transparent" />
             <div className="absolute bottom-3 left-4 flex items-center gap-2.5">
               <span aria-hidden className="flex h-3 w-3 overflow-hidden rounded-full shadow-lg">
                 <span className="w-1/3 bg-[#008C45]" />

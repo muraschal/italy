@@ -27,7 +27,7 @@ export default function DayBackdrop({ activeDay }: { activeDay: number }) {
             key={src}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.16 }}
+            animate={{ opacity: 0.45 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
@@ -42,7 +42,10 @@ export default function DayBackdrop({ activeDay }: { activeDay: number }) {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/35 to-ink/85" />
+      {/* Oben stark abdunkeln, wo das Tagesprogramm steht — nach unten hin
+          öffnen, damit das Bild im leeren Teil der Spalte zur Geltung kommt.
+          Neutrales Schwarz statt Ink, sonst kippt alles ins Grüne. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/88 via-black/62 to-black/20" />
     </div>
   );
 }

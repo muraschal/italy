@@ -281,7 +281,7 @@ export const days: TripDay[] = [
     date: "2026-08-15",
     label: "Sabato",
     subtitle: "Milano — Rooftop-Pool, Duomo und der Abend in der Stadt",
-    totalCost: 320,
+    totalCost: 316,
     events: [
       {
         time: "~10:00",
@@ -329,8 +329,8 @@ export const days: TripDay[] = [
         locationId: "duomo-milano",
         transport: "walk",
         transportDuration: "6 Min · 400 m",
-        cost: 40,
-        costNote: "2× Dachterrassen-Ticket (Schätzung)",
+        cost: 36,
+        costNote: "2× Dachterrassen mit Lift à 18 €",
         highlight: true,
         icon: "landmark",
         funFact:
@@ -367,7 +367,7 @@ export const days: TripDay[] = [
     date: "2026-08-16",
     label: "Domenica",
     subtitle: "Bergamo — hinauf nach San Vigilio und mit der Funicolare in die Città Alta",
-    totalCost: 200,
+    totalCost: 179,
     events: [
       {
         time: "~10:00",
@@ -375,7 +375,7 @@ export const days: TripDay[] = [
         description: "Vormittag frei · Kaffee, Schaufenster, letzte Runde durchs Zentrum",
         locationId: "sina-de-la-ville",
         transport: "none",
-        cost: 35,
+        cost: 20,
         costNote: "Colazione & Kaffee",
         highlight: false,
         icon: "coffee",
@@ -404,8 +404,8 @@ export const days: TripDay[] = [
         locationId: "citta-alta",
         transport: "metro",
         transportDuration: "~15 Min",
-        cost: 10,
-        costNote: "2× Funicolare",
+        cost: 4,
+        costNote: "2× Funicolare à 1.70 €",
         highlight: true,
         icon: "train",
         funFact:
@@ -441,7 +441,7 @@ export const days: TripDay[] = [
     date: "2026-08-17",
     label: "Lunedì",
     subtitle: "Il Ritorno — nochmals Città Alta, dann die lange Fahrt nach Hause",
-    totalCost: 73,
+    totalCost: 33,
     events: [
       {
         time: "~09:00",
@@ -462,8 +462,8 @@ export const days: TripDay[] = [
         locationId: "citta-alta",
         transport: "walk",
         transportDuration: "~22 Min · 1,7 km",
-        cost: 45,
-        costNote: "Kaffee & Kleinigkeit",
+        cost: 15,
+        costNote: "Kaffee & Gelato",
         highlight: true,
         icon: "landmark",
         funFact:
@@ -486,8 +486,8 @@ export const days: TripDay[] = [
         locationId: "erlenbach",
         transport: "car",
         transportDuration: "~4 Std 20 · 335 km",
-        cost: 28,
-        costNote: "Maut Autostrada",
+        cost: 18,
+        costNote: "Maut Autostrada (Schätzung)",
         highlight: true,
         icon: "car",
         funFact:
@@ -635,19 +635,20 @@ export const budgetOnSite: BudgetItem[] = [
   // Freitag
   { label: "Seven7 Ascona — Pizza & Drinks", amount: 140, icon: "utensils" },
   // Samstag
-  { label: "Duomo Dachterrassen (2×)", amount: 40, icon: "landmark" },
+  { label: "Duomo Dachterrassen (2× Lift à 18 €)", amount: 36, icon: "landmark" },
   { label: "Dinner & Drinks Milano", amount: 280, icon: "champagne" },
   // Sonntag
-  { label: "Colazione & Kaffee Milano", amount: 35, icon: "coffee" },
-  { label: "Funicolare Bergamo (2×)", amount: 10, icon: "train" },
+  { label: "Colazione & Kaffee Milano", amount: 20, icon: "coffee" },
+  { label: "Funicolare Bergamo (2× à 1.70 €)", amount: 4, icon: "train" },
   { label: "Cena Città Alta", amount: 155, icon: "utensils" },
   // Montag
-  { label: "Kaffee Città Alta", amount: 45, icon: "coffee" },
-  { label: "Maut Italien (Autostrada)", amount: 28, icon: "car" },
+  { label: "Kaffee & Gelato Città Alta", amount: 15, icon: "coffee" },
+  { label: "Maut Autostrada (Schätzung)", amount: 18, icon: "car" },
   // Übergreifend — 13 l/100 km, Preise Stand August 2026
   { label: "Treibstoff Schweiz (506 km · CHF 1.96/l)", amount: 138, icon: "car" },
   { label: "Treibstoff Italien (225 km · 2.00 €/l)", amount: 59, icon: "car" },
-  { label: "Parking & Hotelgarage", amount: 90, icon: "car" },
+  { label: "Area C Milano (2 Tage à 7.50 €)", amount: 15, icon: "car" },
+  { label: "Hotelgarage Milano & Bergamo", amount: 65, icon: "car" },
 ];
 
 export const totalPaid = budgetPaid.reduce((s, i) => s + i.amount, 0);

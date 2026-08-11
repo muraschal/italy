@@ -1,5 +1,9 @@
-/** CHF pro 1 EUR — gleiche Referenz wie für die Flugbuchungen (Budget). */
-export const CHF_PER_EUR = 0.934;
+/**
+ * CHF pro 1 EUR — Devisenmittelkurs vom 11. August 2026.
+ * Beim Aktualisieren auch die Preisangaben in `data/trip.ts` prüfen, die als
+ * Klartext im Label stehen (z. B. „CHF 1.96/l“).
+ */
+export const CHF_PER_EUR = 0.9344;
 
 export type TripCurrency = "EUR" | "CHF";
 

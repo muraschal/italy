@@ -141,6 +141,16 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
+          {/* Italien in den Landesfarben — Quelle und Lizenz stehen im Footer. */}
+          <Image
+            src="/images/italy-flag-map.svg"
+            alt="Umriss Italiens in den Landesfarben"
+            width={737}
+            height={870}
+            priority
+            className="mx-auto mb-5 h-16 w-auto drop-shadow-[0_4px_18px_rgba(0,0,0,0.85)] sm:h-20"
+          />
+
           <p className="text-text-secondary text-sm tracking-[0.3em] uppercase mb-4">
             13.–17. August 2026
           </p>

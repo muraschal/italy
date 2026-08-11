@@ -21,6 +21,7 @@
     ]
   },
   "events": {
+    "abfahrt-richtung-sueden": "/images/events/abfahrt-richtung-sueden.jpg",
     "tiefenbrunnen": "/images/events/tiefenbrunnen.webp"
   },
   "days": {

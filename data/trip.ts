@@ -222,7 +222,7 @@ export const days: TripDay[] = [
     date: "2026-08-14",
     label: "Venerdì",
     subtitle: "Verso il lago — Vormittag in Mergoscia, Pizza in Ascona, Abend in Como",
-    totalCost: 140,
+    totalCost: 160,
     events: [
       {
         time: "~10:00",
@@ -255,7 +255,7 @@ export const days: TripDay[] = [
         description: "Der Freitagabend-Stopp direkt an der Piazza",
         locationId: "ascona",
         transport: "none",
-        cost: 140,
+        cost: 160,
         costNote: "Pizza & Drinks für 2",
         highlight: true,
         icon: "utensils",
@@ -281,7 +281,7 @@ export const days: TripDay[] = [
     date: "2026-08-15",
     label: "Sabato",
     subtitle: "Milano — Rooftop-Pool, Duomo und der Abend in der Stadt",
-    totalCost: 316,
+    totalCost: 336,
     events: [
       {
         time: "~10:00",
@@ -343,7 +343,7 @@ export const days: TripDay[] = [
         locationId: "navigli",
         transport: "metro",
         transportDuration: "~15 Min",
-        cost: 280,
+        cost: 300,
         costNote: "Dinner & Drinks für 2",
         highlight: true,
         icon: "champagne",
@@ -367,7 +367,7 @@ export const days: TripDay[] = [
     date: "2026-08-16",
     label: "Domenica",
     subtitle: "Bergamo — hinauf nach San Vigilio und mit der Funicolare in die Città Alta",
-    totalCost: 179,
+    totalCost: 219,
     events: [
       {
         time: "~10:00",
@@ -375,7 +375,7 @@ export const days: TripDay[] = [
         description: "Vormittag frei · Kaffee, Schaufenster, letzte Runde durchs Zentrum",
         locationId: "sina-de-la-ville",
         transport: "none",
-        cost: 20,
+        cost: 35,
         costNote: "Colazione & Kaffee",
         highlight: false,
         icon: "coffee",
@@ -417,7 +417,7 @@ export const days: TripDay[] = [
         description: "Bergamasker Küche · Casoncelli, Polenta, Valcalepio im Glas",
         locationId: "citta-alta",
         transport: "none",
-        cost: 155,
+        cost: 180,
         costNote: "Abendessen + Wein für 2",
         highlight: true,
         icon: "utensils",
@@ -441,7 +441,7 @@ export const days: TripDay[] = [
     date: "2026-08-17",
     label: "Lunedì",
     subtitle: "Il Ritorno — nochmals Città Alta, dann die lange Fahrt nach Hause",
-    totalCost: 33,
+    totalCost: 43,
     events: [
       {
         time: "~09:00",
@@ -462,7 +462,7 @@ export const days: TripDay[] = [
         locationId: "citta-alta",
         transport: "walk",
         transportDuration: "~22 Min · 1,7 km",
-        cost: 15,
+        cost: 25,
         costNote: "Kaffee & Gelato",
         highlight: true,
         icon: "landmark",
@@ -621,11 +621,48 @@ export const drive = {
   kmItaly: 225,
 };
 
-/** 731 km × 13 l/100 km ≈ 95 Liter. */
-export const fuelLitres = Math.round((drive.totalKm * drive.consumptionL100) / 100);
+/**
+ * Treibstoff wird gerechnet, nicht geschätzt — damit die Zahlen zusammenpassen,
+ * wenn am Verbrauch gedreht wird.
+ *
+ * Preise Anfang August 2026: TCS meldet CHF 1.96/l für Bleifrei 95; in Italien
+ * kostet Self-Service 1,985 €/l an der Strasse und 2,056 €/l an der Autostrada,
+ * hier gemittelt auf 2.00 €/l.
+ *
+ * Zur Einordnung: Bei 13 l/100 km braucht die Strecke rund 95 Liter. Wer mit
+ * zwei vollen Tankfüllungen rechnet, liegt beim 981er (gut 64 l Tank) bei etwa
+ * 128 Litern — das entspräche gut 17 l/100 km.
+ */
+export const fuel = {
+  priceChfPerLitre: 1.96,
+  priceEurPerLitre: 2.0,
+  chfPerEur: 0.9344,
+};
 
+const litres = (km: number) => (km * drive.consumptionL100) / 100;
+
+export const fuelLitres = Math.round(litres(drive.totalKm));
+export const fuelLitresSwitzerland = Math.round(litres(drive.kmSwitzerland));
+export const fuelLitresItaly = Math.round(litres(drive.kmItaly));
+
+/** Schweizer Sprit in EUR, damit alle Budgetposten dieselbe Währung führen. */
+export const fuelCostSwitzerlandEur = Math.round(
+  (litres(drive.kmSwitzerland) * fuel.priceChfPerLitre) / fuel.chfPerEur
+);
+export const fuelCostItalyEur = Math.round(litres(drive.kmItaly) * fuel.priceEurPerLitre);
+
+/**
+ * Übernachtungen. Alle vier Nächte sind aufgeführt — vorher fehlten Mergoscia
+ * und Como ganz, was das Gesamtbudget deutlich zu tief auswies.
+ *
+ * Preisniveau August 2026: Der 15. August ist Ferragosto, am Comer See also
+ * Hochsaison; Recherchen zeigen für 2026 rund verdoppelte Zimmerpreise
+ * gegenüber den Vorjahren.
+ */
 export const budgetPaid: BudgetItem[] = [
-  { label: "Sina De La Ville, Milano (1 Nacht)", amount: 320, icon: "hotel" },
+  { label: "Mergoscia (1 Nacht · Schätzung)", amount: 150, icon: "hotel" },
+  { label: "Como (1 Nacht · Platzhalter, noch nicht gebucht)", amount: 200, icon: "hotel" },
+  { label: "Sina De La Ville, Milano (1 Nacht)", amount: 380, icon: "hotel" },
   { label: "Relais San Vigilio, Bergamo (1 Nacht)", amount: 260, icon: "hotel" },
 ];
 
@@ -633,20 +670,29 @@ export const budgetOnSite: BudgetItem[] = [
   // Donnerstag
   { label: "Autobahnvignette Schweiz", amount: 43, icon: "car" },
   // Freitag
-  { label: "Seven7 Ascona — Pizza & Drinks", amount: 140, icon: "utensils" },
+  { label: "Seven7 Ascona — Pizza & Drinks", amount: 160, icon: "utensils" },
   // Samstag
   { label: "Duomo Dachterrassen (2× Lift à 18 €)", amount: 36, icon: "landmark" },
-  { label: "Dinner & Drinks Milano", amount: 280, icon: "champagne" },
+  { label: "Dinner & Drinks Milano", amount: 300, icon: "champagne" },
   // Sonntag
-  { label: "Colazione & Kaffee Milano", amount: 20, icon: "coffee" },
+  { label: "Colazione & Kaffee Milano", amount: 35, icon: "coffee" },
   { label: "Funicolare Bergamo (2× à 1.70 €)", amount: 4, icon: "train" },
-  { label: "Cena Città Alta", amount: 155, icon: "utensils" },
+  { label: "Cena Città Alta", amount: 180, icon: "utensils" },
   // Montag
-  { label: "Kaffee & Gelato Città Alta", amount: 15, icon: "coffee" },
+  { label: "Kaffee & Gelato Città Alta", amount: 25, icon: "coffee" },
+  { label: "Frühstücke & Mittagessen unterwegs", amount: 215, icon: "utensils" },
   { label: "Maut Autostrada (Schätzung)", amount: 18, icon: "car" },
   // Übergreifend — 13 l/100 km, Preise Stand August 2026
-  { label: "Treibstoff Schweiz (506 km · CHF 1.96/l)", amount: 138, icon: "car" },
-  { label: "Treibstoff Italien (225 km · 2.00 €/l)", amount: 59, icon: "car" },
+  {
+    label: `Treibstoff Schweiz (${drive.kmSwitzerland} km · ${fuelLitresSwitzerland} l · CHF ${fuel.priceChfPerLitre}/l)`,
+    amount: fuelCostSwitzerlandEur,
+    icon: "car",
+  },
+  {
+    label: `Treibstoff Italien (${drive.kmItaly} km · ${fuelLitresItaly} l · ${fuel.priceEurPerLitre.toFixed(2)} €/l)`,
+    amount: fuelCostItalyEur,
+    icon: "car",
+  },
   { label: "Area C Milano (2 Tage à 7.50 €)", amount: 15, icon: "car" },
   { label: "Hotelgarage Milano & Bergamo", amount: 65, icon: "car" },
 ];

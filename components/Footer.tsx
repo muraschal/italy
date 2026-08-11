@@ -76,7 +76,29 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className="mt-12 text-text-muted text-[10px]">
+          {/* Pflichtangabe: Die Kartengrafik im Header steht unter CC BY-SA 3.0. */}
+          <p className="mt-10 text-text-muted/70 text-[9px] leading-relaxed">
+            Kartengrafik Italien:{" "}
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Italy_looking_like_the_flag.svg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dotted hover:text-text-secondary"
+            >
+              Mnemoc
+            </a>
+            ,{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/3.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dotted hover:text-text-secondary"
+            >
+              CC BY-SA 3.0
+            </a>
+          </p>
+
+          <p className="mt-4 text-text-muted text-[10px]">
             Made with love in 2026
           </p>
         </motion.div>

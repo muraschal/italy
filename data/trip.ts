@@ -304,9 +304,9 @@ export const days: TripDay[] = [
           "Die Funicolare von Como nach Brunate fährt seit 1894 und überwindet auf gut anderthalb Kilometern rund 500 Höhenmeter — oben liegt der Blick über die ganze Seegabel.",
       },
       {
-        time: "~14:00",
+        time: "15:00",
         title: "Check-in Sina De La Ville",
-        description: "Via Ulrico Hoepli 6 · zwei Gehminuten hinter der Scala · Rooftop-Pool",
+        description: "Via Ulrico Hoepli 6 · Deluxe Room · Rooftop-Pool, Frühstück inklusive",
         locationId: "sina-de-la-ville",
         transport: "car",
         transportDuration: "~50 Min · 52 km",
@@ -376,7 +376,7 @@ export const days: TripDay[] = [
     date: "2026-08-16",
     label: "Sonntag",
     subtitle: "Bergamo — hinauf nach San Vigilio und mit der Funicolare in die Città Alta",
-    totalCost: 219,
+    totalCost: 196,
     events: [
       {
         time: "~10:00",
@@ -384,8 +384,8 @@ export const days: TripDay[] = [
         description: "Vormittag frei · Kaffee, Schaufenster, letzte Runde durchs Zentrum",
         locationId: "sina-de-la-ville",
         transport: "none",
-        cost: 35,
-        costNote: "Colazione & Kaffee",
+        cost: 12,
+        costNote: "Frühstücksbuffet inklusive, nur Kaffee unterwegs",
         highlight: false,
         icon: "coffee",
         funFact:
@@ -544,15 +544,20 @@ export const tickets: Record<string, TicketInfo> = {
   "sina-de-la-ville": {
     title: "Sina De La Ville — 1 Nacht",
     day: "Samstag",
-    datetime: "Sa 15. Aug 14:00 – So 16. Aug",
-    confirmed: false,
+    datetime: "Sa 15. Aug ab 15:00 – So 16. Aug vor 12:00",
+    confirmed: true,
+    // Buchungsnummer bewusst nicht hinterlegt: Die Seite ist öffentlich
+    // erreichbar, und eine Referenz gehört nicht ins offene Netz.
     refs: [],
     notes: [
-      "Via Ulrico Hoepli 6, 20121 Milano",
+      "Via Ulrico Hoepli 6, 20121 Milano · +39 02 879 1311",
+      "Deluxe Room, King Bed · 2 Personen",
+      "Frühstücksbuffet und WLAN inklusive",
       "Rooftop-Pool · Duomo zu Fuss erreichbar",
       "Area C: Einfahrt über das Hotel anmelden",
-      "TODO: aktuell favorisiert — noch nicht gebucht",
+      "283.49 € direkt im Hotel zu zahlen",
     ],
+    cancellation: "Kostenlos stornierbar bis 13. Aug 14:00 · danach eine Nacht · ab 15. Aug 14:00 keine Rückerstattung",
   },
   "relais-san-vigilio": {
     title: "Relais San Vigilio al Castello — 1 Nacht",
@@ -605,11 +610,11 @@ export const hotels = [
     address: "Via Ulrico Hoepli 6, 20121 Milano",
     website: "https://www.sinahotels.com/en/h/sina-de-la-ville-milan/",
     googleMapsUrl: "https://maps.google.com/?q=Via+Ulrico+Hoepli+6+20121+Milano",
-    checkIn: "Sa 14:00",
-    checkOut: "So ~13:00",
+    checkIn: "Sa 15:00",
+    checkOut: "So 12:00",
     nights: 1,
     coordinates: { lat: 45.4659654, lng: 9.1923116 },
-    note: "Rooftop-Pool über den Dächern, der Duomo zwei Gehminuten entfernt. Aktuell favorisiert.",
+    note: "Rooftop-Pool über den Dächern, der Duomo zwei Gehminuten entfernt. Gebucht, Frühstück inklusive.",
   },
   {
     id: "relais-san-vigilio",
@@ -682,7 +687,7 @@ export const fuelCostItalyEur = Math.round(litres(drive.kmItaly) * fuel.priceEur
 export const budgetPaid: BudgetItem[] = [
   { label: "Mergoscia (1 Nacht · Schätzung)", amount: 150, icon: "hotel" },
   { label: "Como (1 Nacht · Platzhalter, noch nicht gebucht)", amount: 200, icon: "hotel" },
-  { label: "Sina De La Ville, Milano (1 Nacht)", amount: 380, icon: "hotel" },
+  { label: "Sina De La Ville, Milano (1 Nacht · gebucht)", amount: 283, icon: "hotel" },
   { label: "Relais San Vigilio, Bergamo (1 Nacht)", amount: 260, icon: "hotel" },
 ];
 
@@ -695,7 +700,7 @@ export const budgetOnSite: BudgetItem[] = [
   { label: "Duomo Dachterrassen (2× Lift à 18 €)", amount: 36, icon: "landmark" },
   { label: "Langosteria Bistrot, Milano", amount: 300, icon: "utensils" },
   // Sonntag
-  { label: "Colazione & Kaffee Milano", amount: 35, icon: "coffee" },
+  { label: "Kaffee Milano (Frühstück im Zimmerpreis)", amount: 12, icon: "coffee" },
   { label: "Funicolare Bergamo (2× à 1.70 €)", amount: 4, icon: "train" },
   { label: "Cena Città Alta", amount: 180, icon: "utensils" },
   // Montag

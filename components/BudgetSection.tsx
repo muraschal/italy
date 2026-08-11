@@ -172,11 +172,11 @@ export default function BudgetSection() {
           <div className="flex justify-between text-[10px] text-text-muted mt-2">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-accent-green/60" />
-              Bereits bezahlt · {paidPercent}%
+              Unterkünfte · {paidPercent}%
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-accent/40" />
-              Vor Ort · {100 - paidPercent}%
+              Unterwegs · {100 - paidPercent}%
             </span>
           </div>
         </motion.div>
@@ -200,7 +200,7 @@ export default function BudgetSection() {
                   <CheckCircle2 className="w-4 h-4 text-accent-green/70" />
                 </div>
                 <div>
-                  <p className="text-xs text-accent-green/70 uppercase tracking-wider font-medium">Bezahlt</p>
+                  <p className="text-xs text-accent-green/90 uppercase tracking-wider font-medium">Unterkünfte</p>
                   <p className="text-lg font-light text-text-primary tabular-nums mt-0.5">
                     ~{formatBudgetMoney(totalPaid, currency)}
                   </p>
@@ -254,7 +254,7 @@ export default function BudgetSection() {
                   <Clock className="w-4 h-4 text-accent/70" />
                 </div>
                 <div>
-                  <p className="text-xs text-accent/90 uppercase tracking-wider font-medium">Vor Ort</p>
+                  <p className="text-xs text-accent/90 uppercase tracking-wider font-medium">Unterwegs</p>
                   <p className="text-lg font-light text-text-primary tabular-nums mt-0.5">
                     ~{formatBudgetMoney(totalOnSite, currency)}
                   </p>

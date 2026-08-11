@@ -87,8 +87,9 @@ Die rotierenden Fakten liegen als flaches String-Array in `public/data/italy-fac
 
 ## Offen
 
+Sina De La Ville (Milano) ist gebucht: Sa 15. Aug ab 15:00 bis So 16. Aug 12:00, Deluxe Room, Frühstück inklusive, 283.49 € vor Ort. Kostenlos stornierbar bis 13. Aug 14:00.
+
 - Unterkunft in Como suchen und buchen
 - Reservation im Seven7 (Ascona)
-- Buchung Sina De La Ville — aktuell favorisiert, noch nicht fix
 - Buchungsreferenz Relais San Vigilio nachtragen
 - Hotelgarage in Bergamo für den GTS reservieren

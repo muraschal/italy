@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MapPin, Globe, Moon, ExternalLink, Route, Clock, Mountain } from "lucide-react";
+import { MapPin, Globe, Moon, ExternalLink, Route, Clock, Mountain, CalendarX } from "lucide-react";
 import { hotels, drive, tickets } from "@/data/trip";
 import imageManifest from "@/data/image-manifest.json";
 
@@ -186,6 +186,15 @@ export default function HotelCard() {
                     <span className="text-accent font-medium">{h.checkOut}</span>
                   </p>
                 </div>
+
+                {tickets[h.id]?.cancellation && (
+                  <div className="flex items-start gap-2">
+                    <CalendarX className="w-3.5 h-3.5 text-accent-red/70 mt-0.5 shrink-0" />
+                    <p className="text-[10px] text-text-secondary leading-snug">
+                      {tickets[h.id]!.cancellation}
+                    </p>
+                  </div>
+                )}
 
                 {h.website && (
                   <div className="flex items-center gap-2">

@@ -28,13 +28,17 @@ export interface FuelRow {
   eur: number;
 }
 
-/** Tanken auf der Route — in der Schweiz voll machen lohnt sich nicht immer. */
+/**
+ * Tanken auf der Route. Schweiz und Italien sind Tageswerte von Anfang August
+ * 2026 (TCS: CHF 1.96/l; Italien Self-Service 1,985 €/l an der Strasse,
+ * 2,056 €/l an der Autostrada), die übrigen Länder gerundete Richtwerte.
+ */
 export const FUEL_COMPARE: FuelRow[] = [
-  { country: "Schweiz", flag: "CH", eur: 1.85 },
-  { country: "Italien", flag: "IT", eur: 1.82 },
+  { country: "Schweiz", flag: "CH", eur: 2.1 },
+  { country: "Italien (Autostrada)", flag: "IT", eur: 2.06 },
+  { country: "Italien (Strasse)", flag: "IT", eur: 1.99 },
   { country: "Frankreich", flag: "FR", eur: 1.78 },
   { country: "Deutschland", flag: "DE", eur: 1.75 },
-  { country: "Österreich", flag: "AT", eur: 1.62 },
 ];
 
 export interface TravelInsight {

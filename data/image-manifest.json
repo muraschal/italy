@@ -9,6 +9,9 @@
     "como": [
       "/images/spots/como-1.webp"
     ],
+    "duomo-milano": [
+      "/images/spots/duomo-milano-1.avif"
+    ],
     "mergoscia": [
       "/images/spots/mergoscia-1.jpg",
       "/images/spots/mergoscia-2.webp"
@@ -20,7 +23,14 @@
   "events": {
     "tiefenbrunnen": "/images/events/tiefenbrunnen.webp"
   },
+  "days": {
+    "giorno-1": "/images/days/giorno-1.jpg",
+    "giorno-2": "/images/days/giorno-2.jpg",
+    "giorno-3": "/images/days/giorno-3.avif",
+    "giorno-4": "/images/days/giorno-4.jpg"
+  },
   "extras": {
-    "gts": "/images/gts.webp"
+    "gts": "/images/gts.webp",
+    "reise": "/images/reise.jpg"
   }
 }

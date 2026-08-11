@@ -15,8 +15,16 @@ function bookingState(hotelId: string): boolean | undefined {
   return tickets[hotelId]?.confirmed;
 }
 
+const extras = imageManifest.extras as Record<string, string | undefined>;
+
 /** Optionales Bild des Wagens: `public/images/gts.jpg` ablegen, fertig. */
-const carImage = (imageManifest.extras as Record<string, string | undefined>).gts;
+const carImage = extras.gts;
+
+/** Sektionshintergrund hinter dem Wagen: `public/images/reise.jpg`. */
+const sectionImage = extras.reise;
+
+/** Ortsbilder für die Kartenhintergründe — `imageId` zeigt auf eine Location mit Galerie. */
+const spotGalleries = imageManifest.spots as Record<string, string[] | undefined>;
 
 const STATS = [
   { Icon: Route, label: "Fahrstrecke", value: `${drive.totalKm} km` },
@@ -32,6 +40,18 @@ export default function HotelCard() {
       className="relative min-h-dvh flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-6"
       style={{ backgroundColor: "#082027" }}
     >
+      {sectionImage && (
+        <Image
+          src={sectionImage}
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          quality={72}
+          className="object-cover opacity-[0.22]"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#082027] via-[#082027]/75 to-[#082027] pointer-events-none" />
       <div className="absolute inset-0 texture-noise pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -59,31 +79,6 @@ export default function HotelCard() {
             Vier Nächte zwischen Verzascatal und Città Alta, drei davon am See
           </p>
         </motion.div>
-
-        {/* Der Wagen — erscheint, sobald public/images/gts.jpg existiert */}
-        {carImage && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden mb-6 aspect-[21/9] sm:aspect-[3/1]"
-          >
-            <Image
-              src={carImage}
-              alt={drive.car}
-              fill
-              sizes="(max-width: 1024px) 100vw, 64rem"
-              className="object-cover"
-              quality={82}
-              priority={false}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#082027] via-transparent to-transparent" />
-            <p className="absolute bottom-3 left-4 text-[10px] sm:text-[11px] text-white/85 tracking-[0.22em] uppercase drop-shadow-lg">
-              {drive.car}
-            </p>
-          </motion.div>
-        )}
 
         {/* Kennzahlen der Fahrt */}
         <motion.div
@@ -115,8 +110,24 @@ export default function HotelCard() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.15 + i * 0.08 }}
-              className="glass rounded-2xl p-5 border border-accent/[0.06] hover:border-accent/[0.14] transition-colors flex flex-col"
+              className="relative overflow-hidden glass rounded-2xl p-5 border border-accent/[0.06] hover:border-accent/[0.14] transition-colors flex flex-col"
             >
+              {/* Ortsbild als Kartenhintergrund — kräftig abgedunkelt, damit
+                  Adresse und Zeiten lesbar bleiben. */}
+              {spotGalleries[h.imageId]?.[0] && (
+                <div className="absolute inset-0 -z-10" aria-hidden>
+                  <Image
+                    src={spotGalleries[h.imageId]![0]}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, 32rem"
+                    quality={70}
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#082027]/92 via-[#082027]/86 to-[#082027]/95" />
+                </div>
+              )}
+
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="min-w-0">
                   <p className="text-[10px] text-accent/70 uppercase tracking-[0.2em]">
@@ -190,6 +201,37 @@ export default function HotelCard() {
             </motion.div>
           ))}
         </div>
+
+        {/* Der Wagen als Abschluss der Sektion — public/images/gts.jpg */}
+        {carImage && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-2xl overflow-hidden mt-6 aspect-[21/9] sm:aspect-[3/1]"
+          >
+            <Image
+              src={carImage}
+              alt={drive.car}
+              fill
+              sizes="(max-width: 1024px) 100vw, 64rem"
+              className="object-cover"
+              quality={82}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#082027] via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-4 flex items-center gap-2.5">
+              <span aria-hidden className="flex h-3 w-3 overflow-hidden rounded-full shadow-lg">
+                <span className="w-1/3 bg-[#008C45]" />
+                <span className="w-1/3 bg-[#F4F5F0]" />
+                <span className="w-1/3 bg-[#CD212A]" />
+              </span>
+              <p className="text-[10px] sm:text-[11px] text-white/90 tracking-[0.22em] uppercase drop-shadow-lg">
+                {drive.car} · {drive.consumptionL100} l/100 km
+              </p>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );

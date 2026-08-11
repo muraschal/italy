@@ -157,7 +157,7 @@ export default function ItalyTravelInsights() {
             ))}
           </div>
           <p className="text-[9px] text-text-muted/70 mt-4 leading-relaxed border-t border-white/[0.05] pt-3">
-            Schweiz und Italien liegen nah beieinander — der Umweg zum Tanken lohnt sich auf dieser Route nicht. Teuer wird es an den Raststätten direkt an der Autostrada.
+            Die Schweiz liegt umgerechnet vorn, Italien knapp dahinter — der Umweg zum Tanken lohnt sich auf dieser Route nicht. Wer an der Autostrada tankt, zahlt gegenüber der Landstrasse rund sieben Rappen mehr pro Liter.
           </p>
         </div>
       </div>

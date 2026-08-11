@@ -184,8 +184,12 @@ function TransportConnector({ from, to, event, dayKey, segmentColor, hoveredSegm
         <div
           className={routeBadgePillClass}
           style={{
-            borderColor: isHighlighted ? `${c}80` : `${c}40`,
-            background: isHighlighted ? `${c}1a` : `${c}0d`,
+            borderColor: isHighlighted ? `${c}80` : `${c}45`,
+            // Farbton über deckender Grundfläche — sonst schluckt das
+            // Tages-Hintergrundbild die Pille.
+            background: isHighlighted
+              ? `linear-gradient(${c}26, ${c}26), rgba(8, 28, 36, 0.88)`
+              : `linear-gradient(${c}14, ${c}14), rgba(8, 28, 36, 0.82)`,
             ...(isHighlighted ? { boxShadow: `0 0 20px ${c}30` } : {}),
           }}
         >
@@ -277,8 +281,12 @@ function ExitWalkConnector({ fromName, toName, durationMin, distanceKm, color, h
         <div
           className={routeBadgePillClass}
           style={{
-            borderColor: isHighlighted ? `${c}80` : `${c}40`,
-            background: isHighlighted ? `${c}1a` : `${c}0d`,
+            borderColor: isHighlighted ? `${c}80` : `${c}45`,
+            // Farbton über deckender Grundfläche — sonst schluckt das
+            // Tages-Hintergrundbild die Pille.
+            background: isHighlighted
+              ? `linear-gradient(${c}26, ${c}26), rgba(8, 28, 36, 0.88)`
+              : `linear-gradient(${c}14, ${c}14), rgba(8, 28, 36, 0.82)`,
             ...(isHighlighted ? { boxShadow: `0 0 20px ${c}30` } : {}),
           }}
         >

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ItalyHeroFact from "./ItalyHeroFact";
 import { TRIP_START_ISO } from "@/data/trip";
@@ -11,15 +11,79 @@ import imageManifest from "@/data/image-manifest.json";
 const TARGET = new Date(TRIP_START_ISO).getTime();
 
 /**
- * Hero-Hintergrund: `public/images/hero.jpg` gewinnt, sonst das erste Bild von
- * Como. Ohne jedes Bild bleibt der reine Farbverlauf — nichts bricht.
+ * Alle Galeriebilder der Reise-Stationen, in der Reihenfolge des Manifests.
+ * Reine Ortsbilder — der Wagen und die Party gehören woanders hin.
  */
-const extras = imageManifest.extras as Record<string, string | undefined>;
-const spots = imageManifest.spots as Record<string, string[] | undefined>;
-const HERO_IMAGE = extras.hero ?? spots.como?.[0];
+const spots = imageManifest.spots as Record<string, string[]>;
+const HERO_IMAGES = Object.values(spots).flat();
+
+/** Wie lange ein Bild steht, bevor überblendet wird. */
+const SLIDE_MS = 7000;
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
+}
+
+function randomIndex(max: number) {
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    const buf = new Uint32Array(1);
+    crypto.getRandomValues(buf);
+    return buf[0]! % max;
+  }
+  return Math.floor(Math.random() * max);
+}
+
+/** Nächstes Bild — zufällig, aber nie dasselbe zweimal hintereinander. */
+function nextIndex(prev: number, len: number) {
+  if (len <= 1) return 0;
+  return (prev + 1 + randomIndex(len - 1)) % len;
+}
+
+/**
+ * Zufällige Diashow hinter dem Titel.
+ *
+ * Startet bewusst deterministisch bei Bild 0, damit Server und Client dasselbe
+ * rendern; gewürfelt wird erst ab dem ersten Intervall-Tick.
+ */
+function HeroSlideshow() {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    if (HERO_IMAGES.length <= 1) return;
+    const id = setInterval(() => setIdx((p) => nextIndex(p, HERO_IMAGES.length)), SLIDE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  if (HERO_IMAGES.length === 0) return null;
+
+  return (
+    <>
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={idx}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.78 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.6, ease: "easeInOut" }}
+        >
+          <Image
+            src={HERO_IMAGES[idx]!}
+            alt=""
+            aria-hidden
+            fill
+            sizes="100vw"
+            priority={idx === 0}
+            quality={82}
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+      {/* Nur so viel Abdunklung wie der Text braucht — oben und unten stärker,
+          in der Bildmitte fast nichts. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/10 to-ink/80 pointer-events-none" />
+    </>
+  );
 }
 
 export default function Hero() {
@@ -44,26 +108,12 @@ export default function Hero() {
       {/* Background gradient — Nachthimmel über den Alpen */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a2b36] via-[#06181f] to-ink" />
 
-      {/* Grossflächiges Hintergrundbild, stark abgedunkelt damit der Text trägt */}
-      {HERO_IMAGE && (
-        <>
-          <Image
-            src={HERO_IMAGE}
-            alt=""
-            aria-hidden
-            fill
-            sizes="100vw"
-            priority
-            quality={85}
-            className="object-cover opacity-45"
-          />
-          <div className="absolute inset-0 bg-ink/45 pointer-events-none" />
-        </>
-      )}
+      {/* Zufällige Diashow der Stationen, abgedunkelt damit der Text trägt */}
+      <HeroSlideshow />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/25 to-ink pointer-events-none" />
-
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_50%_30%,rgba(232,132,92,0.3)_0%,transparent_70%)]" />
+      {/* Die Diashow bringt ihren eigenen Verlauf mit — hier keine zweite
+          Abdunklung mehr, sonst verschwinden die Bilder im Blau. */}
+      <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_50%_30%,rgba(232,132,92,0.3)_0%,transparent_70%)]" />
 
       {/* Subtle star-like particles */}
       <div className="absolute inset-0 z-[6] overflow-hidden pointer-events-none">
@@ -103,10 +153,20 @@ export default function Hero() {
             Fünf Tage · Tessin, Como, Milano &amp; Bergamo
           </p>
 
+          {/* Trikolore statt Flaggengrafik: läuft von Grün über die Kennzahl
+              nach Rot durch — Italien-Zitat ohne fremdes Bildmaterial. */}
           <div className="flex items-center justify-center gap-3 mt-7 mb-8">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent opacity-40" />
-            <span className="text-accent text-xs tracking-[0.2em] uppercase">731 km · 4 Nächte</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent opacity-40" />
+            <span
+              aria-hidden
+              className="h-[2px] w-14 sm:w-20 rounded-full bg-gradient-to-r from-transparent via-[#008C45] to-[#F4F5F0] opacity-80"
+            />
+            <span className="text-text-primary text-xs tracking-[0.2em] uppercase drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
+              731 km · 4 Nächte
+            </span>
+            <span
+              aria-hidden
+              className="h-[2px] w-14 sm:w-20 rounded-full bg-gradient-to-r from-[#F4F5F0] via-[#CD212A] to-transparent opacity-80"
+            />
           </div>
         </motion.div>
 

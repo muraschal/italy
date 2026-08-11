@@ -26,13 +26,28 @@ const EVENT_IMAGE_BY_LOCATION = imageManifest.events as Record<string, string | 
 const SPOT_GALLERIES = imageManifest.spots as Record<string, string[] | undefined>;
 
 /**
- * Ausnahmen, wenn ein Ort mehrere Programmpunkte mit unterschiedlichen Bildern
- * hat — Schlüssel ist der Event-Titel aus data/trip.ts.
+ * Event-Titel → Dateiname, damit mehrere Programmpunkte am selben Ort eigene
+ * Bilder bekommen können. „Abfahrt Richtung Süden“ sucht also nach
+ * `public/images/events/abfahrt-richtung-sueden.jpg`.
  */
-const EVENT_IMAGE_BY_TITLE: Record<string, string> = {};
+function slugifyTitle(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
 
+/**
+ * Reihenfolge: eigenes Bild für diesen Programmpunkt, sonst das Ortsbild unter
+ * `events/`, sonst das erste Galeriebild des Orts.
+ */
 function getEventImage(event: TripEvent): string | undefined {
-  if (EVENT_IMAGE_BY_TITLE[event.title]) return EVENT_IMAGE_BY_TITLE[event.title];
+  const byTitle = EVENT_IMAGE_BY_LOCATION[slugifyTitle(event.title)];
+  if (byTitle) return byTitle;
   if (!event.locationId) return undefined;
   return EVENT_IMAGE_BY_LOCATION[event.locationId] ?? SPOT_GALLERIES[event.locationId]?.[0];
 }
@@ -208,12 +223,15 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
         } : {
           borderColor: "rgb(255, 255, 255, 0.06)",
         }}>
-          <div className="absolute inset-0 transition-colors duration-200" style={isHovered ? {
-            backgroundColor: `${HOVER_COLOR}0f`,
+          {/* Deckende Grundfläche: Die Tagesspalte trägt ein Foto — ohne sie
+              scheint es durch die Karte und der Text wird unlesbar. Der
+              Zustands-Farbton liegt als Verlaufsebene darüber. */}
+          <div className="absolute inset-0 backdrop-blur-[2px] transition-colors duration-200" style={isHovered ? {
+            background: `linear-gradient(${HOVER_COLOR}24, ${HOVER_COLOR}24), rgba(8, 28, 36, 0.9)`,
           } : isBooked ? {
-            backgroundColor: "rgb(212, 175, 55, 0.03)",
+            background: "linear-gradient(rgba(232,132,92,0.07), rgba(232,132,92,0.07)), rgba(8, 28, 36, 0.88)",
           } : {
-            backgroundColor: "rgb(255, 255, 255, 0.015)",
+            background: "rgba(8, 28, 36, 0.86)",
           }} />
           {getEventImage(event) && (
             <div
@@ -227,7 +245,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${getEventImage(event)})` }}
               />
-              <div className={`absolute inset-0 ${isBooked ? "bg-accent/[0.04]" : "bg-ink/30"}`} />
+              <div className={`absolute inset-0 ${isBooked ? "bg-ink/45" : "bg-ink/55"}`} />
             </div>
           )}
         </div>

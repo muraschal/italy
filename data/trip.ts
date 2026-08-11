@@ -130,18 +130,6 @@ export const locations: Location[] = [
       "Auf die Dachterrassen hinauf — zwischen den Fialen hindurch fotografieren. Früh am Morgen ist die Piazza noch leer.",
   },
   {
-    id: "galleria",
-    name: "Galleria Vittorio Emanuele II",
-    address: "Piazza del Duomo, 20123 Milano",
-    coordinates: { lat: 45.4659, lng: 9.1899 },
-    googleMapsUrl: "https://maps.google.com/?q=Galleria+Vittorio+Emanuele+II",
-    category: "shopping",
-    photoSpot: true,
-    instagramUrl: "https://www.instagram.com/explore/tags/galleriavittorioemanuele/",
-    photoTip:
-      "Kamera flach auf den Mosaikboden legen und die Glaskuppel spiegeln lassen — oder von der Cafébar im ersten Stock nach unten.",
-  },
-  {
     id: "navigli",
     name: "Navigli",
     address: "Naviglio Grande, 20144 Milano",
@@ -188,7 +176,7 @@ export const days: TripDay[] = [
     date: "2026-08-13",
     label: "Giovedì",
     subtitle: "La Partenza — nach der Rundfunk-Party über den Gotthard ins Verzascatal",
-    totalCost: 60,
+    totalCost: 43,
     events: [
       {
         time: "~21:00",
@@ -208,8 +196,8 @@ export const days: TripDay[] = [
         description: "Tiefenbrunnen raus, A2 rein — nachts durch den Gotthard ohne Stau",
         locationId: "tiefenbrunnen",
         transport: "none",
-        cost: 60,
-        costNote: "Tanken & Vignette",
+        cost: 43,
+        costNote: "Autobahnvignette Schweiz (40 CHF)",
         highlight: false,
         icon: "car",
         funFact:
@@ -349,19 +337,6 @@ export const days: TripDay[] = [
           "Der Bau dauerte fast 600 Jahre. Bis 1960 durfte kein Gebäude Mailands die Madonnina auf der Spitze überragen — der Pirelli-Turm bekam deshalb eine eigene Kopie aufs Dach.",
       },
       {
-        time: "~19:00",
-        title: "Galleria Vittorio Emanuele II",
-        description: "Glasgewölbe von 1877 · der Salotto di Milano auf dem Weg zum Dinner",
-        locationId: "galleria",
-        transport: "walk",
-        transportDuration: "5 Min · 400 m",
-        cost: null,
-        highlight: false,
-        icon: "shopping",
-        funFact:
-          "Auf dem Mosaikboden liegt ein Stier — sich mit dem Absatz dreimal auf ihm zu drehen soll Glück bringen. Der arme Stier muss deshalb regelmässig neu verlegt werden.",
-      },
-      {
         time: "~20:30",
         title: "Dinner & Milano am Abend",
         description: "Vorschlag: Aperitivo und Cena an den Navigli — Bar an Bar entlang des Kanals",
@@ -466,7 +441,7 @@ export const days: TripDay[] = [
     date: "2026-08-17",
     label: "Lunedì",
     subtitle: "Il Ritorno — nochmals Città Alta, dann die lange Fahrt nach Hause",
-    totalCost: 145,
+    totalCost: 73,
     events: [
       {
         time: "~09:00",
@@ -511,8 +486,8 @@ export const days: TripDay[] = [
         locationId: "erlenbach",
         transport: "car",
         transportDuration: "~4 Std 20 · 335 km",
-        cost: 100,
-        costNote: "Tanken & Maut",
+        cost: 28,
+        costNote: "Maut Autostrada",
         highlight: true,
         icon: "car",
         funFact:
@@ -578,6 +553,7 @@ export const tickets: Record<string, TicketInfo> = {
 export const hotels = [
   {
     id: "mergoscia",
+    imageId: "mergoscia",
     name: "Mergoscia",
     city: "Verzascatal",
     address: "6647 Mergoscia, Tessin",
@@ -590,6 +566,7 @@ export const hotels = [
   },
   {
     id: "como",
+    imageId: "como",
     name: "Como",
     city: "Lago di Como",
     address: "22100 Como, Lombardei",
@@ -602,6 +579,7 @@ export const hotels = [
   },
   {
     id: "sina-de-la-ville",
+    imageId: "duomo-milano",
     name: "Sina De La Ville",
     city: "Milano",
     address: "Via Ulrico Hoepli 6, 20121 Milano",
@@ -611,10 +589,11 @@ export const hotels = [
     checkOut: "So ~13:00",
     nights: 1,
     coordinates: { lat: 45.4659654, lng: 9.1923116 },
-    note: "Rooftop-Pool über den Dächern, Duomo und Galleria vor der Tür. Aktuell favorisiert.",
+    note: "Rooftop-Pool über den Dächern, der Duomo zwei Gehminuten entfernt. Aktuell favorisiert.",
   },
   {
     id: "relais-san-vigilio",
+    imageId: "citta-alta",
     name: "Relais San Vigilio al Castello",
     city: "Bergamo",
     address: "Via al Castello 7, 24129 Bergamo",
@@ -635,7 +614,15 @@ export const drive = {
   totalHours: 10.4,
   legs: 6,
   passes: ["Gotthard", "Monte Ceneri"],
+  /** Realverbrauch, nicht Werksangabe. */
+  consumptionL100: 13,
+  /** Streckenanteile pro Land, gerundet aus data/car-routes.json. */
+  kmSwitzerland: 506,
+  kmItaly: 225,
 };
+
+/** 731 km × 13 l/100 km ≈ 95 Liter. */
+export const fuelLitres = Math.round((drive.totalKm * drive.consumptionL100) / 100);
 
 export const budgetPaid: BudgetItem[] = [
   { label: "Sina De La Ville, Milano (1 Nacht)", amount: 320, icon: "hotel" },
@@ -644,7 +631,7 @@ export const budgetPaid: BudgetItem[] = [
 
 export const budgetOnSite: BudgetItem[] = [
   // Donnerstag
-  { label: "Tanken & Vignette", amount: 60, icon: "car" },
+  { label: "Autobahnvignette Schweiz", amount: 43, icon: "car" },
   // Freitag
   { label: "Seven7 Ascona — Pizza & Drinks", amount: 140, icon: "utensils" },
   // Samstag
@@ -656,8 +643,10 @@ export const budgetOnSite: BudgetItem[] = [
   { label: "Cena Città Alta", amount: 155, icon: "utensils" },
   // Montag
   { label: "Kaffee Città Alta", amount: 45, icon: "coffee" },
-  { label: "Tanken & Maut Rückfahrt", amount: 100, icon: "car" },
-  // Übergreifend
+  { label: "Maut Italien (Autostrada)", amount: 28, icon: "car" },
+  // Übergreifend — 13 l/100 km, Preise Stand August 2026
+  { label: "Treibstoff Schweiz (506 km · CHF 1.96/l)", amount: 138, icon: "car" },
+  { label: "Treibstoff Italien (225 km · 2.00 €/l)", amount: 59, icon: "car" },
   { label: "Parking & Hotelgarage", amount: 90, icon: "car" },
 ];
 

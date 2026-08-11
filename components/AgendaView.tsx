@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import RouteMap from "./RouteMap";
 import Timeline from "./Timeline";
 import DayTabs from "./DayTabs";
+import DayBackdrop from "./DayBackdrop";
 import { useAgendaDay } from "./AgendaDayContext";
 
 function useIsDesktop() {
@@ -100,8 +101,9 @@ export default function AgendaView() {
             />
           </div>
 
-          <div className="w-[45%] border-l border-white/[0.06]">
-            <div className="py-6">
+          <div className="relative w-[45%] border-l border-white/[0.06] overflow-hidden">
+            <DayBackdrop activeDay={activeDay} />
+            <div className="relative z-10 py-6">
               <Timeline
                 activeDay={activeDay}
                 onDayChange={setActiveDay}
@@ -145,7 +147,9 @@ export default function AgendaView() {
       </div>
 
       {/* Timeline — scrolls naturally */}
-      <div className="px-1 py-4">
+      <div className="relative px-1 py-4 overflow-hidden">
+        <DayBackdrop activeDay={activeDay} />
+        <div className="relative z-10">
         <Timeline
           activeDay={activeDay}
           onDayChange={setActiveDay}
@@ -157,6 +161,7 @@ export default function AgendaView() {
           onHoverEvent={handleTimelineEventHover}
           onHoverSegment={handleTimelineSegmentHover}
         />
+        </div>
       </div>
     </section>
   );

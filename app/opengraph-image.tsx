@@ -36,6 +36,13 @@ export default async function Image() {
           }}
         />
 
+        {/* Trikolore als Kopfzeile */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 12, display: "flex" }}>
+          <div style={{ flex: 1, background: "#008C45" }} />
+          <div style={{ flex: 1, background: "#F4F5F0" }} />
+          <div style={{ flex: 1, background: "#CD212A" }} />
+        </div>
+
         {/* Roadtrip emoji */}
         <div style={{ fontSize: 120, marginBottom: 20, display: "flex" }}>🏔️</div>
 
@@ -73,7 +80,7 @@ export default async function Image() {
           style={{
             width: 80,
             height: 1,
-            background: "linear-gradient(90deg, transparent, #e8845c, transparent)",
+            background: "linear-gradient(90deg, transparent, #008C45, #F4F5F0, #CD212A, transparent)",
             marginBottom: 24,
             display: "flex",
           }}

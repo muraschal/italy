@@ -11,11 +11,12 @@
  *   public/images/spots/<location-id>-1.jpg    Galerie beim Foto-Spot
  *   public/images/spots/<location-id>-2.jpg    weitere Bilder desselben Spots
  *   public/images/events/<location-id>.jpg     Hintergrund im Tagesprogramm
+ *   public/images/days/<day-key>.jpg           Hintergrund eines ganzen Reisetags
  *   public/images/<name>.jpg                   freies Bild, z. B. `gts.jpg`
  *
- * `<location-id>` ist die `id` aus `data/trip.ts`, also z. B. `mergoscia`,
- * `como` oder `navigli`. Bilder direkt in `public/images/` landen unter ihrem
- * Dateinamen in `extras` und werden gezielt eingebunden (siehe HotelCard).
+ * `<location-id>` ist die `id` aus `data/trip.ts`, `<day-key>` einer der Werte
+ * aus `DAY_KEYS` in `lib/constants.ts` (`giorno-1` … `giorno-5`). Bilder direkt
+ * in `public/images/` landen unter ihrem Dateinamen in `extras`.
  */
 
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from "fs";
@@ -28,6 +29,8 @@ interface Manifest {
   spots: Record<string, string[]>;
   /** location-id → einzelnes Hintergrundbild */
   events: Record<string, string>;
+  /** day-key → Hintergrundbild des ganzen Reisetags */
+  days: Record<string, string>;
   /** Dateiname ohne Endung → Bild, für alles ausserhalb der Ortslogik */
   extras: Record<string, string>;
 }
@@ -78,6 +81,7 @@ const publicImages = join(process.cwd(), "public", "images");
 const manifest: Manifest = {
   spots: buildSpots(join(publicImages, "spots")),
   events: buildFlat(join(publicImages, "events"), "/images/events"),
+  days: buildFlat(join(publicImages, "days"), "/images/days"),
   extras: buildFlat(publicImages, "/images"),
 };
 
@@ -87,12 +91,14 @@ writeFileSync(outPath, JSON.stringify(manifest, null, 2) + "\n");
 const spotCount = Object.values(manifest.spots).reduce((s, g) => s + g.length, 0);
 console.log(
   `✓ data/image-manifest.json — ${spotCount} Spot-Bild(er) in ${Object.keys(manifest.spots).length} Galerie(n), ` +
-    `${Object.keys(manifest.events).length} Event-Bild(er), ${Object.keys(manifest.extras).length} Extra(s)`
+    `${Object.keys(manifest.events).length} Event-Bild(er), ${Object.keys(manifest.days).length} Tages-Bild(er), ` +
+    `${Object.keys(manifest.extras).length} Extra(s)`
 );
 
 const known = [
   ...Object.keys(manifest.spots),
   ...Object.keys(manifest.events),
+  ...Object.keys(manifest.days),
   ...Object.keys(manifest.extras),
 ];
 if (known.length > 0) console.log(`  Zugeordnet: ${[...new Set(known)].join(", ")}`);

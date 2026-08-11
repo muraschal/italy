@@ -4,34 +4,36 @@
       <stop offset="0%" stop-color="#06181f"/>
       <stop offset="100%" stop-color="#0d2b35"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f9b795"/>
-      <stop offset="100%" stop-color="#e8845c"/>
-    </linearGradient>
-    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#46c4bb"/>
-      <stop offset="100%" stop-color="#2c9a92"/>
-    </linearGradient>
+    <clipPath id="round">
+      <rect width="512" height="512" rx="108"/>
+    </clipPath>
   </defs>
-  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
 
-  <!-- Alpenkette -->
-  <g fill="url(#accent)" fill-opacity="0.13" stroke="url(#accent)" stroke-width="9" stroke-linejoin="round">
-    <path d="M96,286 L168,154 L240,286 Z"/>
-    <path d="M232,286 L318,126 L404,286 Z"/>
+  <g clip-path="url(#round)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+
+    <!-- Trikolore als Grundmotiv, gedämpft damit die Strasse trägt -->
+    <g opacity="0.5">
+      <rect x="0"   y="0" width="171" height="512" fill="#008C45"/>
+      <rect x="171" y="0" width="170" height="512" fill="#F4F5F0"/>
+      <rect x="341" y="0" width="171" height="512" fill="#CD212A"/>
+    </g>
+    <rect width="512" height="512" fill="#06181f" opacity="0.42"/>
+
+    <!-- Alpenkette -->
+    <g fill="#06181f" fill-opacity="0.4" stroke="#F4F5F0" stroke-width="10" stroke-linejoin="round">
+      <path d="M96,282 L168,150 L240,282 Z"/>
+      <path d="M232,282 L318,122 L404,282 Z"/>
+    </g>
+    <path d="M292,170 L318,122 L344,170 L326,160 L310,172 Z" fill="#F4F5F0"/>
+
+    <!-- Passstrasse -->
+    <path d="M120,424 C196,424 176,368 250,368 C324,368 300,314 380,314"
+          fill="none" stroke="#F4F5F0" stroke-width="26" stroke-linecap="round"/>
+    <path d="M120,424 C196,424 176,368 250,368 C324,368 300,314 380,314"
+          fill="none" stroke="#06181f" stroke-width="20" stroke-linecap="round"/>
+    <path d="M120,424 C196,424 176,368 250,368 C324,368 300,314 380,314"
+          fill="none" stroke="#F4F5F0" stroke-width="4" stroke-linecap="round"
+          stroke-dasharray="14 22" opacity="0.9"/>
   </g>
-  <!-- Schneekappe auf dem Hauptgipfel -->
-  <path d="M292,174 L318,126 L344,174 L326,164 L310,176 Z" fill="url(#accent)" fill-opacity="0.8"/>
-
-  <!-- See -->
-  <path d="M72,300 H440 v22 a368,26 0 0 1 -368,0 Z" fill="url(#water)" fill-opacity="0.28"/>
-  <path d="M96,330 q40,-12 80,0 t80,0 t80,0 t56,0" fill="none" stroke="url(#water)" stroke-width="7"
-        stroke-linecap="round" opacity="0.55"/>
-
-  <!-- Passstrasse -->
-  <path d="M128,418 C196,418 176,368 244,368 C312,368 292,322 360,322"
-        fill="none" stroke="url(#accent)" stroke-width="18" stroke-linecap="round"/>
-  <path d="M128,418 C196,418 176,368 244,368 C312,368 292,322 360,322"
-        fill="none" stroke="#06181f" stroke-width="4" stroke-linecap="round"
-        stroke-dasharray="16 20" opacity="0.85"/>
 </svg>

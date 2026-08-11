@@ -34,7 +34,6 @@ const locations: Record<string, Coord> = {
   como: { lat: 45.8103, lng: 9.0832 },
   "sina-de-la-ville": { lat: 45.4659654, lng: 9.1923116 },
   "duomo-milano": { lat: 45.4641, lng: 9.1919 },
-  galleria: { lat: 45.4659, lng: 9.1899 },
   navigli: { lat: 45.4506, lng: 9.174 },
   "relais-san-vigilio": { lat: 45.7090243, lng: 9.6512689 },
   "citta-alta": { lat: 45.7036, lng: 9.6627 },
@@ -60,7 +59,6 @@ const segments: Segment[] = [
   // Sa — Como → Milano, abends zu Fuss durchs Zentrum
   { from: "como", to: "sina-de-la-ville", day: "giorno-3", mode: "car" },
   { from: "sina-de-la-ville", to: "duomo-milano", day: "giorno-3", mode: "walk" },
-  { from: "duomo-milano", to: "galleria", day: "giorno-3", mode: "walk" },
   { from: "navigli", to: "sina-de-la-ville", day: "giorno-3", mode: "walk" },
   // So — Milano → Bergamo, dann hoch in die Città Alta
   { from: "sina-de-la-ville", to: "relais-san-vigilio", day: "giorno-4", mode: "car" },

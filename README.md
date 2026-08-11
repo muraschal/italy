@@ -64,12 +64,14 @@ Bilder werden **allein durch Ablegen** eingebunden — kein Code-Eingriff. Der D
 | `public/images/spots/<location-id>-1.jpg` | Hauptbild der Galerie beim Foto-Spot |
 | `public/images/spots/<location-id>-2.jpg` | weiteres Bild desselben Spots (fortlaufend nummeriert) |
 | `public/images/events/<location-id>.jpg` | Hintergrund des Programmpunkts in der Timeline |
+| `public/images/days/<day-key>.jpg` | Hintergrund eines ganzen Reisetags |
 | `public/images/gts.jpg` | Bild des Wagens, als Banner in der Unterkunfts-Sektion |
-| `public/images/hero.jpg` | grossflächiger Hero-Hintergrund (ohne Datei: erstes Como-Bild) |
+| `public/images/reise.jpg` | Hintergrund der Unterkunfts-Sektion, hinter dem Wagen |
 
-Spot-Bilder werden mehrfach verwendet: Sie erscheinen in der Galerie, dienen im Tagesprogramm als Event-Hintergrund (falls unter `events/` kein eigenes liegt) und tragen die Hintergründe von Budget- und Footer-Sektion.
+Spot-Bilder werden mehrfach verwendet: Sie laufen als **zufällige Diashow im Hero**, erscheinen in der Galerie, dienen im Tagesprogramm als Event-Hintergrund (falls unter `events/` kein eigenes liegt) und tragen die Hintergründe von Budget- und Footer-Sektion.
 
-Aktuelle IDs: `tiefenbrunnen`, `mergoscia`, `ascona`, `como`, `sina-de-la-ville`, `duomo-milano`, `galleria`, `navigli`, `relais-san-vigilio`, `citta-alta`, `erlenbach`.
+Aktuelle Location-IDs: `tiefenbrunnen`, `mergoscia`, `ascona`, `como`, `sina-de-la-ville`, `duomo-milano`, `navigli`, `relais-san-vigilio`, `citta-alta`, `erlenbach`.
+Tages-Keys: `giorno-1` (Do) bis `giorno-5` (Mo).
 
 Daraus erzeugt `scripts/generate-image-manifest.ts` die Datei `data/image-manifest.json`. Das läuft automatisch als `prebuild`, lässt sich aber auch direkt anstossen:
 

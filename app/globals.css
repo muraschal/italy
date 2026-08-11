@@ -17,9 +17,16 @@
   --color-glass: rgba(255, 255, 255, 0.04);
   --color-glass-border: rgba(255, 255, 255, 0.09);
   --color-glass-hover: rgba(255, 255, 255, 0.08);
+  /*
+   * Drei Textstufen, alle über dem WCAG-AA-Schwellwert von 4.5:1 gegen die
+   * dunkelste Sektionsfläche (#061a20, Footer). Gemessen:
+   * primary 15.7:1 · secondary 5.9:1 · muted 4.7:1.
+   * `muted` lag bei 0.32 und damit bei 2.7:1 — deutlich unter AA (SC 1.4.3).
+   * Wer den Alphawert senkt, bricht die Konformität: unter 0.485 reisst es.
+   */
   --color-text-primary: #f4f0e6;
   --color-text-secondary: rgba(244, 240, 230, 0.58);
-  --color-text-muted: rgba(244, 240, 230, 0.32);
+  --color-text-muted: rgba(244, 240, 230, 0.5);
   --color-accent-red: #e8635d;
   --color-accent-green: #6fd39a;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Coffee, Hotel, Waves, Wine, UtensilsCrossed, Sunset,
@@ -148,7 +149,13 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
   const location = event.locationId ? getLocation(event.locationId) : null;
   const ticket: TicketInfo | undefined = event.ticketRef ? tickets[event.ticketRef] : undefined;
   const hasTicket = ticket && ticket.refs.length > 0;
-  const isBooked = !!event.ticketRef || event.costPaid === true;
+  /**
+   * „Gebucht“ nur, wenn wirklich gebucht. Vorher genügte ein `ticketRef` —
+   * also die blosse Existenz eines Reservationseintrags — und das Badge stand
+   * auf sieben Programmpunkten, obwohl keine einzige Buchung bestätigt ist.
+   * Der Buchungsstand lebt in `tickets[...].confirmed`.
+   */
+  const isBooked = (ticket?.confirmed ?? false) || event.costPaid === true;
   const isFixedTime = !event.time.startsWith("~") && event.time !== "Late";
 
   const anyHoverActive =
@@ -243,9 +250,17 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
                 WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 70%)",
               }}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${getEventImage(event)})` }}
+              {/* Über next/image statt als CSS-Hintergrund: Als background-image
+                  ging das Original ungerechnet an den Browser — gemessen 408 KB
+                  für einen rund 100 px breiten Streifen. */}
+              <Image
+                src={getEventImage(event)!}
+                alt=""
+                aria-hidden
+                fill
+                sizes="(max-width: 640px) 25vw, 160px"
+                quality={60}
+                className="object-cover"
               />
               <div
                 className={`absolute inset-0 ${
@@ -362,7 +377,7 @@ export default function TimelineEventCard({ event, eventKey, isLast, hoveredEven
                   onClick={(e) => { e.stopPropagation(); setFactOpen(!factOpen); }}
                   className="flex items-center gap-1.5 text-[10px] text-text-muted hover:text-accent/80 transition-colors"
                 >
-                  <span className="text-accent/60">{factOpen ? "▾" : "▸"}</span>
+                  <span className="text-accent/90">{factOpen ? "▾" : "▸"}</span>
                   <span className="uppercase tracking-[0.1em] font-medium">Fun Fact</span>
                 </button>
                 <AnimatePresence initial={false}>

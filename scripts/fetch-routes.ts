@@ -116,6 +116,63 @@ interface RouteResult {
   durationMinutes: number;
 }
 
+/**
+ * Douglas-Peucker: wirft Stützpunkte weg, die innerhalb der Toleranz auf der
+ * Verbindungslinie ihrer Nachbarn liegen.
+ *
+ * Die Rohdaten der Router sind für Navigation gedacht, nicht für eine Übersichts-
+ * karte: Eine 335-km-Etappe kam mit über 7000 Punkten zurück. Da die gesamte
+ * Datei per Import im Client-Bundle landet, kostet jeder Punkt Ladezeit, ohne
+ * bei den hier gezeigten Zoomstufen sichtbar zu sein.
+ */
+function simplify(points: [number, number][], toleranceDeg: number): [number, number][] {
+  if (points.length <= 2) return points;
+
+  /** Senkrechter Abstand von `p` zur Geraden `a`–`b`, in Grad. */
+  const perpendicular = (p: [number, number], a: [number, number], b: [number, number]) => {
+    const [py, px] = p;
+    const [ay, ax] = a;
+    const [by, bx] = b;
+    const dy = by - ay;
+    const dx = bx - ax;
+    if (dy === 0 && dx === 0) return Math.hypot(py - ay, px - ax);
+    // Längengrade schrumpfen mit der Breite — sonst wird in Nord-Süd-Richtung zu grob vereinfacht.
+    const k = Math.cos((ay * Math.PI) / 180);
+    return Math.abs(dy * (ax - px) * k - (ay - py) * dx * k) / Math.hypot(dy, dx * k);
+  };
+
+  const keep = new Uint8Array(points.length);
+  keep[0] = 1;
+  keep[points.length - 1] = 1;
+
+  const stack: [number, number][] = [[0, points.length - 1]];
+  while (stack.length > 0) {
+    const [first, last] = stack.pop()!;
+    let maxDist = 0;
+    let index = -1;
+    for (let i = first + 1; i < last; i++) {
+      const d = perpendicular(points[i], points[first], points[last]);
+      if (d > maxDist) {
+        maxDist = d;
+        index = i;
+      }
+    }
+    if (index !== -1 && maxDist > toleranceDeg) {
+      keep[index] = 1;
+      stack.push([first, index], [index, last]);
+    }
+  }
+
+  return points.filter((_, i) => keep[i] === 1);
+}
+
+/**
+ * Toleranz je Modus. Autoetappen werden über ganze Regionen gezeigt, Fusswege
+ * im Strassenraster — dort muss feiner aufgelöst bleiben.
+ * 0.00025° entsprechen rund 28 m, 0.00002° rund 2 m.
+ */
+const TOLERANCE: Record<Mode, number> = { car: 0.00025, walk: 0.00002 };
+
 /** Autoetappe über OSRM. */
 async function fetchCarRoute(origin: Coord, dest: Coord) {
   const coords = `${origin.lng},${origin.lat};${dest.lng},${dest.lat}`;
@@ -177,7 +234,13 @@ async function fetchRoute(segment: Segment): Promise<RouteResult | null> {
         ? await fetchCarRoute(origin, dest)
         : await fetchWalkRoute(origin, dest);
 
-    return { from: segment.from, to: segment.to, day: segment.day, ...route };
+    return {
+      from: segment.from,
+      to: segment.to,
+      day: segment.day,
+      ...route,
+      points: simplify(route.points, TOLERANCE[segment.mode]),
+    };
   } catch (err) {
     console.error(`\n    Fehler für ${segment.from} → ${segment.to}:`, err);
     return null;
@@ -187,6 +250,7 @@ async function fetchRoute(segment: Segment): Promise<RouteResult | null> {
 async function main() {
   console.log(`Hole ${segments.length} Etappen (Auto: ${OSRM_BASE}, Fuss: ${VALHALLA_BASE}) ...\n`);
 
+  let totalPoints = 0;
   const walking: RouteResult[] = [];
   const driving: RouteResult[] = [];
 
@@ -198,6 +262,7 @@ async function main() {
       (segment.mode === "car" ? driving : walking).push(result);
       const km = (result.distanceMeters / 1000).toFixed(1);
       console.log(`✓ ${result.points.length} Punkte, ${km} km, ${result.durationMinutes} min`);
+      totalPoints += result.points.length;
     } else {
       console.log("✗ fehlgeschlagen");
     }
@@ -215,6 +280,8 @@ async function main() {
   console.log("");
   write("walking-routes.json", walking);
   write("car-routes.json", driving);
+  console.log(`
+${totalPoints} Stützpunkte nach Vereinfachung.`);
 }
 
 main();

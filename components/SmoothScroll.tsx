@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { ReactLenis } from "lenis/react";
 import type { LenisRef } from "lenis/react";
-import { frame, cancelFrame } from "framer-motion";
+import { frame, cancelFrame, useReducedMotion } from "framer-motion";
 
 const LUXURY_EASING = (t: number) => 1 - Math.pow(1 - t, 4);
 
@@ -17,6 +17,7 @@ const LUXURY_EASING = (t: number) => 1 - Math.pow(1 - t, 4);
  */
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<LenisRef>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     function update(data: { timestamp: number }) {
@@ -27,13 +28,19 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   }, []);
 
   return (
+    /*
+     * Bei `prefers-reduced-motion` wird Lenis nicht ausgehängt, sondern auf
+     * lerp 1 gestellt — das ergibt Scrollen ohne Trägheit. Den Baum umzubauen
+     * (Fragment statt Provider) wäre ein Hydration-Mismatch, weil Server und
+     * erster Client-Render dieselbe Struktur liefern müssen.
+     */
     <ReactLenis
       ref={lenisRef}
       root
       options={{
-        lerp: 0.09,
-        duration: 1.2,
-        smoothWheel: true,
+        lerp: reduceMotion ? 1 : 0.09,
+        duration: reduceMotion ? 0 : 1.2,
+        smoothWheel: !reduceMotion,
         wheelMultiplier: 1,
         touchMultiplier: 1.5,
         autoRaf: false,

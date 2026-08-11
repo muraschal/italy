@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ItalyHeroFact from "./ItalyHeroFact";
 import { TRIP_START_ISO } from "@/data/trip";
@@ -47,12 +47,15 @@ function nextIndex(prev: number, len: number) {
  */
 function HeroSlideshow() {
   const [idx, setIdx] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (HERO_IMAGES.length <= 1) return;
+    // WCAG 2.2.2: Automatik, die länger als fünf Sekunden läuft, braucht eine
+    // Stopp-Möglichkeit. Wer Bewegung abbestellt hat, bekommt ein Standbild.
+    if (reduceMotion || HERO_IMAGES.length <= 1) return;
     const id = setInterval(() => setIdx((p) => nextIndex(p, HERO_IMAGES.length)), SLIDE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [reduceMotion]);
 
   if (HERO_IMAGES.length === 0) return null;
 

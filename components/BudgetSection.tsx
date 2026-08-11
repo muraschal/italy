@@ -254,7 +254,7 @@ export default function BudgetSection() {
                   <Clock className="w-4 h-4 text-accent/70" />
                 </div>
                 <div>
-                  <p className="text-xs text-accent/70 uppercase tracking-wider font-medium">Vor Ort</p>
+                  <p className="text-xs text-accent/90 uppercase tracking-wider font-medium">Vor Ort</p>
                   <p className="text-lg font-light text-text-primary tabular-nums mt-0.5">
                     ~{formatBudgetMoney(totalOnSite, currency)}
                   </p>

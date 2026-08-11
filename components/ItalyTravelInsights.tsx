@@ -180,7 +180,7 @@ export default function ItalyTravelInsights() {
                   <Icon className="w-3.5 h-3.5 text-accent/65" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-semibold text-text-primary tracking-wide uppercase text-accent/75 mb-1">
+                  <p className="text-[11px] font-semibold text-text-primary tracking-wide uppercase text-accent/90 mb-1">
                     {item.title}
                   </p>
                   <p className="text-[11px] text-text-secondary leading-relaxed">{item.detail}</p>

@@ -133,7 +133,7 @@ export default function HotelCard() {
 
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="min-w-0">
-                  <p className="text-[10px] text-accent/70 uppercase tracking-[0.2em]">
+                  <p className="text-[10px] text-accent/90 uppercase tracking-[0.2em]">
                     Nacht {i + 1} · {h.city}
                   </p>
                   <h3 className="text-base sm:text-lg font-light text-text-primary mt-1 leading-snug">
@@ -171,7 +171,7 @@ export default function HotelCard() {
                       href={h.googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] text-accent/70 hover:text-accent transition-colors inline-flex items-center gap-1 mt-1"
+                      className="text-[10px] text-accent/90 hover:text-accent transition-colors inline-flex items-center gap-1 mt-1"
                     >
                       Google Maps <ExternalLink className="w-2.5 h-2.5" />
                     </a>

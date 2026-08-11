@@ -41,7 +41,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  // Kein `maximumScale`: Die Seite zeigt Schrift bis hinunter zu 8 px (Badges,
+  // Kartenlegende). Pinch-Zoom zu sperren nimmt genau den Nutzern die einzige
+  // Vergrösserung, die sie brauchen — WCAG 2.2 SC 1.4.4 Resize Text.
   themeColor: "#06181f",
 };
 

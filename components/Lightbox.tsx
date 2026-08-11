@@ -79,6 +79,7 @@ export default function Lightbox({
         {/* Close button */}
         <button
           onClick={onClose}
+          aria-label="Ansicht schliessen"
           className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white/20 transition-colors"
         >
           <X className="w-5 h-5 text-white" />
@@ -91,6 +92,7 @@ export default function Lightbox({
               e.stopPropagation();
               goPrev();
             }}
+            aria-label="Vorheriges Foto"
             className="absolute left-3 sm:left-6 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white/20 transition-colors"
           >
             <ChevronLeft className="w-5 h-5 text-white" />
@@ -104,6 +106,7 @@ export default function Lightbox({
               e.stopPropagation();
               goNext();
             }}
+            aria-label="Nächstes Foto"
             className="absolute right-3 sm:right-6 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white/20 transition-colors"
           >
             <ChevronRight className="w-5 h-5 text-white" />
@@ -158,6 +161,8 @@ export default function Lightbox({
                       e.stopPropagation();
                       onNavigate(i);
                     }}
+                    aria-label={`Foto ${i + 1} von ${total}`}
+                    aria-current={i === index}
                     className={`w-1.5 h-1.5 rounded-full transition-all pointer-events-auto ${
                       i === index
                         ? "bg-white w-4"

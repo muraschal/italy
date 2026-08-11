@@ -25,6 +25,19 @@ npm run dev
 
 Die Seite läuft auf [http://localhost:3000](http://localhost:3000).
 
+## Deployment
+
+Produktion läuft auf Vercel unter [italy.rapold.io](https://italy.rapold.io), gebaut über die Vercel-Git-Integration: Jeder Push auf `main` deployt nach Produktion, jeder Pull Request bekommt automatisch eine Preview-URL.
+
+GitHub Actions deployt **nicht** — der Workflow in `.github/workflows/ci.yml` prüft nur, damit Fehler im PR sichtbar werden und nicht erst im Vercel-Build:
+
+| Job | Prüft |
+| --- | --- |
+| `verify` | `tsc --noEmit`, `eslint`, `next build` |
+| `routes` | Jede Etappe aus `trip.ts` hat einen Streckenverlauf in den Routen-JSONs |
+
+Der zweite Job existiert, weil die Karte bei einem fehlenden Streckenverlauf stillschweigend eine gebogene Luftlinie zeichnet. Das sieht plausibel aus — `npm run check-routes` macht es laut.
+
 ## Daten pflegen
 
 Der gesamte Reiseinhalt steckt in **`data/trip.ts`** — Orte, Tagesprogramm, Übernachtungen, Tickets und Budget. Die Komponenten leiten alles davon ab; Tagesanzahl und Farben kommen aus `lib/constants.ts` und müssen zur Länge von `days` passen.

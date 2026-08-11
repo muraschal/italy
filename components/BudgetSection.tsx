@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, CheckCircle2, Clock } from "lucide-react";
 import {
@@ -58,20 +58,34 @@ function PaidBudgetLabel({ item }: { item: BudgetItem }) {
   return <span className="text-xs text-text-secondary leading-snug">{item.label}</span>;
 }
 
+/** Nie abonniert — die Zeitzone des Browsers ändert sich zur Laufzeit nicht. */
+const neverChanges = () => () => {};
+
+function detectCurrency(): TripCurrency {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz === "Europe/Zurich" || navigator.language.endsWith("-CH") ? "CHF" : "EUR";
+  } catch {
+    return "EUR";
+  }
+}
+
+/**
+ * Server rendert immer EUR, der Client korrigiert nach der Hydration auf CHF,
+ * wenn Zeitzone oder Sprache auf die Schweiz zeigen.
+ */
+function useDetectedCurrency(): TripCurrency {
+  return useSyncExternalStore(neverChanges, detectCurrency, () => "EUR" as TripCurrency);
+}
+
 export default function BudgetSection() {
   const [showPaidDetails, setShowPaidDetails] = useState(true);
   const [showOnSiteDetails, setShowOnSiteDetails] = useState(true);
-  const [currency, setCurrency] = useState<TripCurrency>("EUR");
 
-  useEffect(() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const lang = navigator.language;
-      if (tz === "Europe/Zurich" || lang.endsWith("-CH")) {
-        setCurrency("CHF");
-      }
-    } catch {}
-  }, []);
+  // Manuelle Wahl über den Umschalter schlägt die Erkennung.
+  const detectedCurrency = useDetectedCurrency();
+  const [chosenCurrency, setCurrency] = useState<TripCurrency | null>(null);
+  const currency = chosenCurrency ?? detectedCurrency;
 
   const paidPercent = Math.round((totalPaid / totalBudget) * 100);
 

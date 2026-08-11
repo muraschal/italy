@@ -29,13 +29,15 @@ function nextIndex(prev: number, len: number) {
   return n;
 }
 
-/** Wort für Wort */
-function WordReveal({ text, contentKey }: { text: string; contentKey: number }) {
+/**
+ * Wort für Wort. Wird pro Fakt frisch gemountet (`key` an der Aufrufstelle) —
+ * der Zähler startet dadurch von selbst bei 0 und braucht kein Reset im Effekt.
+ */
+function WordReveal({ text }: { text: string }) {
   const words = useMemo(() => text.split(/\s+/).filter(Boolean), [text]);
   const [visible, setVisible] = useState(0);
 
   useEffect(() => {
-    setVisible(0);
     if (words.length === 0) return;
 
     let wordIndex = 0;
@@ -55,13 +57,12 @@ function WordReveal({ text, contentKey }: { text: string; contentKey: number }) 
     return () => {
       if (timeoutId !== undefined) window.clearTimeout(timeoutId);
     };
-  }, [text, contentKey, words.length]);
+  }, [words.length]);
 
   const shown = words.slice(0, visible).join(" ");
 
   return (
     <motion.span
-      key={contentKey}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25 }}
@@ -118,7 +119,7 @@ export default function ItalyHeroFact() {
           transition={{ duration: 0.35 }}
           className="w-full"
         >
-          <WordReveal text={facts[idx]!} contentKey={idx} />
+          <WordReveal key={idx} text={facts[idx]!} />
         </motion.div>
       </AnimatePresence>
     </div>

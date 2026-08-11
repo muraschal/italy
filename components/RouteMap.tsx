@@ -173,7 +173,6 @@ function getVisitNumberForEvent(dayIndex: number, eventIndex: number): number | 
 }
 
 function getSegmentsForDay(dayIndex: number): RouteSegment[] {
-  const chronoRoute = getChronologicalRoute(dayIndex);
   const segments: RouteSegment[] = [];
   const evts = days[dayIndex].events;
 

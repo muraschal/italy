@@ -144,9 +144,11 @@ export const locations: Location[] = [
   {
     id: "langosteria",
     name: "Langosteria Bistrot",
-    address: "Via Savona 10, 20144 Milano",
+    // Via Savona 10 ist das Stammhaus, nicht das Bistrot — und es ist vom
+    // 9. bis 24. August geschlossen. Das Bistrot liegt an der Via Bobbio.
+    address: "Via Privata Bobbio 2, 20144 Milano",
     coordinates: { lat: 45.455637, lng: 9.1714915 },
-    googleMapsUrl: "https://maps.google.com/?q=Langosteria+Bistrot+Via+Savona+10+Milano",
+    googleMapsUrl: "https://maps.google.com/?q=Langosteria+Bistrot+Via+Privata+Bobbio+2+Milano",
     category: "restaurant",
   },
   {
@@ -347,7 +349,7 @@ export const days: TripDay[] = [
       {
         time: "~20:30",
         title: "Cena — Langosteria Bistrot",
-        description: "Fisch und Meeresfrüchte in der Via Savona · danach die Navigli entlang",
+        description: "Fisch und Meeresfrüchte an der Via Bobbio · danach die Navigli entlang",
         locationId: "langosteria",
         transport: "metro",
         transportDuration: "~15 Min",
@@ -514,7 +516,8 @@ export const tickets: Record<string, TicketInfo> = {
     confirmed: false,
     refs: [],
     notes: [
-      "Piazza G. Motta, 6612 Ascona",
+      "Piazza G. Motta 61, 6612 Ascona · +41 91 780 77 71",
+      "Pizzeria durchgehend 12:00–22:00",
       "TODO: reservieren — im August ist die Piazza voll",
     ],
   },
@@ -537,7 +540,8 @@ export const tickets: Record<string, TicketInfo> = {
     confirmed: false,
     refs: [],
     notes: [
-      "Via Savona 10, 20144 Milano",
+      "Via Privata Bobbio 2, 20144 Milano · +39 02 5810 7802",
+      "An Ferragosto geöffnet — das Stammhaus Via Savona dagegen nicht",
       "TODO: reservieren — an einem Ferragosto-Samstag früh dran sein",
     ],
   },

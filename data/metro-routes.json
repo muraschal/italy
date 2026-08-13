@@ -1,38 +1,5 @@
 [
   {
-    "from": "duomo-milano",
-    "to": "langosteria",
-    "day": "giorno-3",
-    "type": "metro",
-    "segments": [
-      {
-        "line": "1",
-        "label": "M1",
-        "emoji": "🚇",
-        "lineColor": "#D52B1E",
-        "direction": "Rho Fiera",
-        "stations": [
-          { "name": "Duomo", "lat": 45.4645, "lng": 9.19, "transfer": false },
-          { "name": "Cordusio", "lat": 45.4661, "lng": 9.1857, "transfer": false },
-          { "name": "Cairoli Castello", "lat": 45.4699, "lng": 9.1817, "transfer": false },
-          { "name": "Cadorna FN", "lat": 45.4686, "lng": 9.1755, "transfer": true }
-        ]
-      },
-      {
-        "line": "2",
-        "label": "M2",
-        "emoji": "🚇",
-        "lineColor": "#00A650",
-        "direction": "Assago / Abbiategrasso",
-        "stations": [
-          { "name": "Cadorna FN", "lat": 45.4686, "lng": 9.1755, "transfer": true },
-          { "name": "Sant'Ambrogio", "lat": 45.4623, "lng": 9.174, "transfer": false },
-          { "name": "Porta Genova FS", "lat": 45.453, "lng": 9.173, "transfer": false }
-        ]
-      }
-    ]
-  },
-  {
     "from": "relais-san-vigilio",
     "to": "citta-alta",
     "day": "giorno-4",

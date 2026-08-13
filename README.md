@@ -9,7 +9,7 @@ Aufgebaut auf demselben Gerüst wie [paris.rapold.io](https://paris.rapold.io): 
 | Tag | Etappe | Übernachtung |
 | --- | --- | --- |
 | Do 13.8. | Rundfunk-Party, Tiefenbrunnen → Mergoscia | Mergoscia |
-| Fr 14.8. | Mergoscia → Ascona (Seven7) → Como | Como |
+| Fr 14.8. | Mergoscia → Ascona (Seven Senses Beachclub) → Como | Como |
 | Sa 15.8. | Como → Milano · Rooftop-Pool, Duomo, Abend in der Stadt | Milano |
 | So 16.8. | Milano → Bergamo · Funicolare in die Città Alta | Bergamo |
 | Mo 17.8. | Città Alta, Rückfahrt nach Erlenbach | — |
@@ -87,9 +87,14 @@ Die rotierenden Fakten liegen als flaches String-Array in `public/data/italy-fac
 
 ## Offen
 
-Sina De La Ville (Milano) ist gebucht: Sa 15. Aug ab 15:00 bis So 16. Aug 12:00, Deluxe Room, Frühstück inklusive, 283.49 € vor Ort. Kostenlos stornierbar bis 13. Aug 14:00.
+Fix gebucht sind:
+
+- **Sina De La Ville** (Milano): Sa 15. Aug ab 15:00 bis So 16. Aug 12:00, Deluxe Room, Frühstück inklusive, 283.49 € vor Ort. Kostenlos stornierbar bis 13. Aug 14:00.
+- **Seven Senses Beach Club** (Lido Ascona): Fr 14. Aug, 11:00.
+- **La Volta at RH Milan**: Sa 15. Aug, 19:45. Ersetzt die zuvor angedachte Langosteria.
+
+Offen:
 
 - Unterkunft in Como suchen und buchen
-- Reservation im Seven7 (Ascona)
 - Buchungsreferenz Relais San Vigilio nachtragen
 - Hotelgarage in Bergamo für den GTS reservieren

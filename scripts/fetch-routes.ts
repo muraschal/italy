@@ -31,11 +31,12 @@ const locations: Record<string, Coord> = {
   tiefenbrunnen: { lat: 47.3547, lng: 8.5556 },
   mergoscia: { lat: 46.2086286, lng: 8.844509 },
   ascona: { lat: 46.154, lng: 8.7705 },
+  "seven-beachclub": { lat: 46.1474998, lng: 8.782188 },
   como: { lat: 45.8103, lng: 9.0832 },
   "sina-de-la-ville": { lat: 45.4659654, lng: 9.1923116 },
   "duomo-milano": { lat: 45.4641, lng: 9.1919 },
   navigli: { lat: 45.4506, lng: 9.174 },
-  langosteria: { lat: 45.455637, lng: 9.1714915 },
+  "la-volta": { lat: 45.4738529, lng: 9.2046909 },
   "relais-san-vigilio": { lat: 45.7090243, lng: 9.6512689 },
   "citta-alta": { lat: 45.7036, lng: 9.6627 },
   erlenbach: { lat: 47.3035307, lng: 8.5934753 },
@@ -54,13 +55,15 @@ interface Segment {
 const segments: Segment[] = [
   // Do — nach der Rundfunk-Party über den Gotthard ins Verzascatal
   { from: "tiefenbrunnen", to: "mergoscia", day: "giorno-1", mode: "car" },
-  // Fr — Mergoscia → Ascona (Seven7) → Como
-  { from: "mergoscia", to: "ascona", day: "giorno-2", mode: "car" },
+  // Fr — Mergoscia → Beachclub am Lido → zu Fuss an die Piazza → Como
+  { from: "mergoscia", to: "seven-beachclub", day: "giorno-2", mode: "car" },
+  { from: "seven-beachclub", to: "ascona", day: "giorno-2", mode: "walk" },
   { from: "ascona", to: "como", day: "giorno-2", mode: "car" },
   // Sa — Como → Milano, abends zu Fuss durchs Zentrum
   { from: "como", to: "sina-de-la-ville", day: "giorno-3", mode: "car" },
   { from: "sina-de-la-ville", to: "duomo-milano", day: "giorno-3", mode: "walk" },
-  { from: "langosteria", to: "sina-de-la-ville", day: "giorno-3", mode: "walk" },
+  { from: "duomo-milano", to: "la-volta", day: "giorno-3", mode: "walk" },
+  { from: "la-volta", to: "sina-de-la-ville", day: "giorno-3", mode: "walk" },
   // So — Milano → Bergamo, dann hoch in die Città Alta
   { from: "sina-de-la-ville", to: "relais-san-vigilio", day: "giorno-4", mode: "car" },
   { from: "citta-alta", to: "relais-san-vigilio", day: "giorno-4", mode: "walk" },
